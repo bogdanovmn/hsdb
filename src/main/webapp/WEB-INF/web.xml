@@ -3,5 +3,36 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <display-name>HSDB Web App</display-name>
+
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>ru.bmn.web.hsdb.servlet.Login</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>ru.bmn.web.hsdb.servlet.Index</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>RequestAuthFilter</filter-name>
+        <filter-class>ru.bmn.web.hsdb.servlet.filter.Auth</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>RequestAuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
+

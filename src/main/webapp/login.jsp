@@ -1,12 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@include file="inc/header_min.jsp"%>
 
 <h1>Вход</h1>
 
-<TMPL_IF error_msg>
-	<div class=error_msg>
-		<TMPL_VAR error_msg>
-	</div>
-</TMPL_IF>
+<%@include file="inc/error_msg.jsp"%>
 
 <div class=login>
 	<form method=post>
