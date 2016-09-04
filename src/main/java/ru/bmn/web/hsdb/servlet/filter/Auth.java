@@ -14,8 +14,12 @@ public class Auth implements Filter {
 
 	}
 
-	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-		HttpServletRequest req  = (HttpServletRequest)  servletRequest;
+	public void doFilter(
+		ServletRequest  servletRequest,
+		ServletResponse servletResponse,
+		FilterChain     filterChain) throws IOException, ServletException {
+
+		HttpServletRequest  req = (HttpServletRequest)  servletRequest;
 		HttpServletResponse res = (HttpServletResponse) servletResponse;
 
 		HttpSession session = req.getSession(false);
@@ -23,14 +27,18 @@ public class Auth implements Filter {
 
 		Boolean isLoggedUserArea = !(uri.endsWith("/login/") || uri.endsWith("/register/"));
 
+		System.out.println(session);
+
 		if (session != null) {
 			if (!isLoggedUserArea) {
 				res.sendRedirect("/collection/out/");
+				return;
 			}
 		}
 		else {
 			if (isLoggedUserArea) {
 				res.sendRedirect("/login/");
+				return;
 			}
 		}
 		// pass the request along the filter chain
