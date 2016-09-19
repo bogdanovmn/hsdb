@@ -5,41 +5,55 @@
 <web-app>
     <display-name>HSDB Web App</display-name>
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/404.html</location>
-    </error-page>
-
+	
+	<!-- FILTERS -->
+	<filter>
+        <filter-name>RequestAuthFilter</filter-name>
+        <filter-class>ru.bmn.web.hsdb.servlet.filter.Auth</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RequestAuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!--  Context Listener -->
+	<listener>
+		<listener-class>ru.bmn.web.hsdb.servlet.Listener</listener-class>
+	</listener>
+	
+	<!-- SERVLETS -->
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>ru.bmn.web.hsdb.servlet.Login</servlet-class>
     </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/login/</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Index</servlet-name>
-        <servlet-class>ru.bmn.web.hsdb.servlet.Index</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Index</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
-
     <servlet>
         <servlet-name>Error</servlet-name>
         <servlet-class>ru.bmn.web.hsdb.servlet.Error</servlet-class>
     </servlet>
-    <!-- servlet mappings -->
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>ru.bmn.web.hsdb.servlet.Index</servlet-class>
+    </servlet>
+    
+	<!-- SERVLET MAPPINGS -->
     <servlet-mapping>
         <servlet-name>Error</servlet-name>
         <url-pattern>/Error</url-pattern>
     </servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+  
+    <!-- ERRORS -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.html</location>
+    </error-page>
     <error-page>
         <error-code>405</error-code>
         <location>/Error</location>
@@ -50,14 +64,6 @@
     </error-page>
 
 
-    <filter>
-        <filter-name>RequestAuthFilter</filter-name>
-        <filter-class>ru.bmn.web.hsdb.servlet.filter.Auth</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>RequestAuthFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+   
 </web-app>
 

@@ -4,32 +4,27 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 
+
 public class Auth implements Filter {
-	private ServletContext context;
-
-	public void init(FilterConfig filterConfig) throws ServletException {
-		this.context = filterConfig.getServletContext();
-
-	}
+	public void init(FilterConfig filterConfig) throws ServletException {}
 
 	public void doFilter(
 		ServletRequest  servletRequest,
 		ServletResponse servletResponse,
-		FilterChain     filterChain) throws IOException, ServletException {
+		FilterChain     filterChain
+	) throws IOException, ServletException {
 
 		HttpServletRequest  req = (HttpServletRequest)  servletRequest;
 		HttpServletResponse res = (HttpServletResponse) servletResponse;
 
-		HttpSession session = req.getSession(false);
-		String uri          = req.getRequestURI();
-
+		HttpSession session      = req.getSession(false);
+		String uri               = req.getRequestURI();
 		Boolean isLoggedUserArea = !(uri.endsWith("/login/") || uri.endsWith("/register/"));
-
-		System.out.println(session);
-
-		if (session != null) {
+		
+		if (session.getAttribute("userId") != null) {
 			if (!isLoggedUserArea) {
 				res.sendRedirect("/collection/out/");
 				return;
