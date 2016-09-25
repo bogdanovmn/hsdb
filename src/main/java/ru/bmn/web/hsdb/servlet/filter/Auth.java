@@ -20,19 +20,19 @@ public class Auth implements Filter {
 		HttpServletRequest  req = (HttpServletRequest)  servletRequest;
 		HttpServletResponse res = (HttpServletResponse) servletResponse;
 
-		HttpSession session      = req.getSession(false);
+		HttpSession session      = req.getSession();
 		String uri               = req.getRequestURI();
 		Boolean isLoggedUserArea = !(uri.endsWith("/login/") || uri.endsWith("/register/"));
 		
 		if (session.getAttribute("userId") != null) {
 			if (!isLoggedUserArea) {
-				res.sendRedirect("/collection/out/");
+				res.sendRedirect(req.getContextPath() + "/collection/out/");
 				return;
 			}
 		}
 		else {
 			if (isLoggedUserArea) {
-				res.sendRedirect("/login/");
+				res.sendRedirect(req.getContextPath() + "/login/");
 				return;
 			}
 		}

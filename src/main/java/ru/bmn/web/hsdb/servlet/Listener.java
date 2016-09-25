@@ -16,9 +16,14 @@ public class Listener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent event) {
 		try {
-			Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gb_hsdb2", "root", "pass");
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gb_hsdb2?useSSL=false", "root", "pass");
 			event.getServletContext().setAttribute("dbConnection", connection);
+			System.err.println(connection);
 		} 
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}

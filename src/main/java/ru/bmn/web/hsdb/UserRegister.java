@@ -31,7 +31,7 @@ public class UserRegister {
 		if (this.id == -1) {
 			try {
 				PreparedStatement stmt = this.connection.prepareStatement(
-					"SELECT * FROM user WHERE name = ? AND password = ?"
+					"SELECT id FROM users WHERE email = ? AND password = MD5(?)"
 				);
 				stmt.setString(1, this.name);
 				stmt.setString(2, this.pass);
@@ -43,7 +43,6 @@ public class UserRegister {
 				else {
 					this.id = 0;
 				}
-				
 				rs.close();
 				stmt.close();
 			}

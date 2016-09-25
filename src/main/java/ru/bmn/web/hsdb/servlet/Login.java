@@ -18,13 +18,13 @@ public class Login extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = req.getParameter("name");
-		String pass = req.getParameter("pass");
-		
-		if (name != null && pass != null) {
+		String email = req.getParameter("email");
+		String pass  = req.getParameter("password");
+
+		if (email != "" && pass != "") {
 			UserRegister userRegister = new UserRegister(
 				(Connection)this.getServletContext().getAttribute("dbConnection"),
-				name,
+				email,
 				pass
 			);
 			
@@ -33,6 +33,12 @@ public class Login extends HttpServlet {
 				resp.sendRedirect("/collection/out/");
 				return;
 			}
+			else {
+				req.setAttribute("error", "Юзер не найден");
+			}
+		}
+		else {
+			req.setAttribute("error", "Заполните все поля!");
 		}
 		getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
 	}

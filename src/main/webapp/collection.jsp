@@ -1,17 +1,19 @@
+<%@ page isELIgnored ="false" %>
 <%@include file="inc/header_main.jsp"%>
 
-<TMPL_IF cards>
-	<TMPL_LOOP cards>
-		<div id=<TMPL_VAR id> class=card>
-			<img src="http://wow.zamimg.com/images/hearthstone/cards/ruru/small/<TMPL_VAR image_url>.png?9786">
+<%!  %>
+<% if (cards) { %>
+	<% while (cards.next()) { %>
+		<div id=${id} class=card>
+			<img src="http://wow.zamimg.com/images/hearthstone/cards/ruru/small/${image_url}.png?9786">
 			<br>
-			<div id='norm_<TMPL_VAR id>' class="counter norm_count"><TMPL_VAR norm_count></div>
-			<div id='gold_<TMPL_VAR id>' class="counter gold_count"><TMPL_VAR gold_count></div>
+			<div id='norm_${id}' class="counter norm_count">${norm_count}</div>
+			<div id='gold_${id}' class="counter gold_count">${gold_count}</div>
 		</div>
-	</TMPL_LOOP>
-<TMPL_ELSE>
+	<% } %>
+<% } else { %>
 	<h2>Пусто</h2>
-</TMPL_IF>
+<% } %>
 
 <script>
 
