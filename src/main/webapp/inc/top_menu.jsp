@@ -1,16 +1,19 @@
-<% if (user_id) { %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:if test="${user_id}">
 	<div id=top_menu>
 		<div id=links>
-			.::<TMPL_LOOP menu>
-				<% if (current) { %>
+			.::<c:forEach var="i" items="${menu}">
+				<c:if test="${not empty current}">
 					<b>${title}</b>
-				<% } else { %>
+				</c:if>
+				<c:if test="${empty current}">
 					<a href='${url}?${current_filter}'>${title}</a>
-				<% } %>
-				<% if (__first__) { %>
+				</c:if>
+				<c:if test="${__first__}">
 					<span class=progress>${collection_percent}%</span>
-				<% } %>
-			::</TMPL_LOOP>.
+				</c:if>
+			::</c:forEach>.
 		</div>
 		<div id=user_info>
 			.::
@@ -20,4 +23,4 @@
 			::.
 		</div>
 	</div>
-<% } %>
+</c:if>

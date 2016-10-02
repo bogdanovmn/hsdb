@@ -1,19 +1,20 @@
 <%@ page isELIgnored ="false" %>
 <%@include file="inc/header_main.jsp"%>
 
-<%!  %>
-<% if (cards) { %>
-	<% while (cards.next()) { %>
-		<div id=${id} class=card>
-			<img src="http://wow.zamimg.com/images/hearthstone/cards/ruru/small/${image_url}.png?9786">
+
+<c:if test="${not empty cards}">
+	<c:forEach var="i" items="${cards}">
+		<div id="${i.id}" class=card>
+			<img src="http://wow.zamimg.com/images/hearthstone/cards/ruru/small/${i.image_url}.png?9786">
 			<br>
-			<div id='norm_${id}' class="counter norm_count">${norm_count}</div>
-			<div id='gold_${id}' class="counter gold_count">${gold_count}</div>
+			<div id='norm_${i.id}' class="counter norm_count">${i.norm_count}</div>
+			<div id='gold_${i.id}' class="counter gold_count">${i.gold_count}</div>
 		</div>
-	<% } %>
-<% } else { %>
+	</c:forEach>
+</c:if>
+<c:if test="${empty cards}">
 	<h2>Пусто</h2>
-<% } %>
+</c:if>
 
 <script>
 
