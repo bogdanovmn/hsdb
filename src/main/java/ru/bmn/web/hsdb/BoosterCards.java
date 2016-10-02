@@ -11,7 +11,7 @@ import java.util.Properties;
 
 import ru.bmn.web.hsdb.Card;
 
-public class Cards {
+public class BoosterCards {
 	private final Connection connection;
 	private HashMap<String, Card>       cardsById          = null;
 	private HashMap<String, List<Card>> cardsByCharacterId = null;
@@ -19,7 +19,7 @@ public class Cards {
 	private boolean isAlreadyFetched = false;
 
 	
-	public Cards(Connection connection) {
+	public BoosterCards(Connection connection) {
 		this.connection = connection;
 	}
 
@@ -79,5 +79,10 @@ public class Cards {
 				this.isAlreadyFetched = true;
 			}
 		}
+	}
+
+	public int total() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

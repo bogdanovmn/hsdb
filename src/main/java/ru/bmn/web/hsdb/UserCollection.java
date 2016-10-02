@@ -40,4 +40,9 @@ public class UserCollection {
 		}
 	}
 
+	public int total() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
