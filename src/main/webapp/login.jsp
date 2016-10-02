@@ -1,13 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page isELIgnored ="false" %>
-
 <%@include file="inc/header_min.jsp"%>
 
 <h1>Вход</h1>
 
 <%@include file="inc/error_msg.jsp"%>
-
-<h2>${error}</h2>
 
 <div class=login>
 	<form method=post>

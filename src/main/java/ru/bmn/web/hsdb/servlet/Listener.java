@@ -8,7 +8,6 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import ru.bmn.web.hsdb.BoosterCards;
-import ru.bmn.web.hsdb.Cards;
 
 
 public class Listener implements ServletContextListener {

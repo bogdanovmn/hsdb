@@ -2,8 +2,8 @@
 
 <div class=main>
 	<!-- Navigation -->
-	<TMPL_INCLUDE NAME="../inc/top_menu.tpl">
+	<%@ include file="top_menu.jsp" %>
 	<div id=mid_area>
-		<TMPL_INCLUDE NAME="../inc/left_menu.tpl">
+		<%@ include file="left_menu.jsp" %>
 		<!-- Content -->
 		<div id=data_area>

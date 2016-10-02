@@ -39,7 +39,6 @@ public class CollectionIn extends HttpServlet {
 						$data;
 					} 
 					@card_ids */
-				],
 		req.setAttribute("type", "in"); 
 		req.setAttribute("collection_percent", Math.floor(100 * collection.total() / boosterCards.total())); 
 		req.setAttribute("filter_character", cards);
@@ -47,11 +46,11 @@ public class CollectionIn extends HttpServlet {
 		req.setAttribute("filter_rarity", cards);
 		req.setAttribute("menu", new HeadMenu("collection_in").items());
 		req.setAttribute("filter_params", cards);
-				filter_character   => $filter_character,
+				/*filter_character   => $filter_character,
 				filter_set         => $filter_set,
 				filter_rarity      => $self->_prepare_filter('rarity', $rarity_id),
 				_prepare_filter_params(character_id => $character_id, rarity_id => $rarity_id, set_id => $set_id),
-		
+				*/
 		
 		getServletContext().getRequestDispatcher("/collection.jsp").forward(req, resp);
 	}
