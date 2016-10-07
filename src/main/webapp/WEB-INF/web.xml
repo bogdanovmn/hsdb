@@ -28,17 +28,16 @@
     <servlet><servlet-name>Collection</servlet-name><servlet-class>ru.bmn.web.hsdb.servlet.Collection</servlet-class></servlet>
     
 	<!-- SERVLET MAPPINGS -->
-    <servlet-mapping><servlet-name>Error</servlet-name>        <url-pattern>/error</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>Error</servlet-name>        <url-pattern>/error/</url-pattern></servlet-mapping>
 	<servlet-mapping><servlet-name>Login</servlet-name>        <url-pattern>/login/</url-pattern></servlet-mapping>
-    <servlet-mapping><servlet-name>Collection</servlet-name>   <url-pattern>/</url-pattern></servlet-mapping>
     <servlet-mapping><servlet-name>CollectionIn</servlet-name> <url-pattern>/collection/in/</url-pattern></servlet-mapping>
     <servlet-mapping><servlet-name>CollectionOut</servlet-name><url-pattern>/collection/out/</url-pattern></servlet-mapping>
   
     <!-- ERRORS -->
     <error-page><error-code>404</error-code><location>/404.html</location></error-page>
-    <error-page><error-code>405</error-code><location>/error</location></error-page>
+    <error-page><error-code>405</error-code><location>/error/</location></error-page>
     
-    <error-page><exception-type>java.lang.Throwable</exception-type><location>/error</location></error-page>
+    <error-page><exception-type>java.lang.Throwable</exception-type><location>/error/</location></error-page>
 
    
 </web-app>
