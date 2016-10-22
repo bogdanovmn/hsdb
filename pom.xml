@@ -5,11 +5,14 @@
 
 	<groupId>ru.bmn</groupId>
 	<artifactId>web-hsdb-basic</artifactId>
-	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 
-	<name>web-hsdb-basic Maven Webapp</name>
+	<name>web-hsdb-basic</name>
 
+	<modules>
+		<module>web-hsdb-basic-webapp</module>
+		<module>web-hsdb-basic-import</module>
+	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -22,19 +25,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.39</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
 		</dependency>
 	</dependencies>
 
@@ -42,17 +35,6 @@
 		<finalName>web-hsdb-basic</finalName>
 
 		<plugins>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<url>http://localhost:8080/manager/text</url>
-					<server>TomcatServer</server>
-					<path>/hsdb</path>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>

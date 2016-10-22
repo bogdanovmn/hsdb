@@ -19,5 +19,17 @@ public class HeadMenuItem {
 	public boolean is(String current) {
 		return this.id == current;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
 }
 
