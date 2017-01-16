@@ -1,9 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@include file="inc/header_min.jsp"%>
 
 <h1>Вход</h1>
 
 <%@include file="inc/error_msg.jsp"%>
-
 <div class=login>
 	<form method=post>
 		<table>
@@ -15,7 +16,7 @@
 			<td><input type=password name=password value=''>
 		<tr>
 			<td><input type=submit name=login_submit value='  Войти  '>
-			<td><a href='/register/'>Регистрация</a>
+			<td><a href='../register/'>Регистрация</a>
 		</table>
 	</form>
 </div>

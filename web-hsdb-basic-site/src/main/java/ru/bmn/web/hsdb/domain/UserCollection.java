@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb;
+package ru.bmn.web.hsdb.domain;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

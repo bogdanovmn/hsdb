@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb;
+package ru.bmn.web.hsdb.domain;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
-
-import ru.bmn.web.hsdb.Card;
 
 public class BoosterCards {
 	private final Connection connection;

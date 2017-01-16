@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb;
+package ru.bmn.web.hsdb.servlet.ui;
 
 import java.util.ArrayList;
 import java.util.List;

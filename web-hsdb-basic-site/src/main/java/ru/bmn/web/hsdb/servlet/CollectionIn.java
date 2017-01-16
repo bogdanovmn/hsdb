@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ru.bmn.web.hsdb.BoosterCards;
-import ru.bmn.web.hsdb.Card;
-import ru.bmn.web.hsdb.HeadMenu;
-import ru.bmn.web.hsdb.UserCollection;
+import ru.bmn.web.hsdb.domain.BoosterCards;
+import ru.bmn.web.hsdb.domain.Card;
+import ru.bmn.web.hsdb.servlet.ui.HeadMenu;
+import ru.bmn.web.hsdb.domain.UserCollection;
 
 
 public class CollectionIn extends HttpServlet {

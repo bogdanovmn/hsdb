@@ -1,13 +1,12 @@
 package ru.bmn.web.hsdb.servlet;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import ru.bmn.web.hsdb.domain.BoosterCards;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import ru.bmn.web.hsdb.BoosterCards;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 
 public class Listener implements ServletContextListener {
@@ -19,15 +18,12 @@ public class Listener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gb_hsdb2?useSSL=false", "root", "pass");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gb_hsdb2?useSSL=false", "root", "12345");
 			event.getServletContext().setAttribute("dbConnection", connection);
 			// Prefetch all cards info			
 			event.getServletContext().setAttribute("boosterCards", new BoosterCards(connection));
 		} 
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch (SQLException e) {
+		catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 	}

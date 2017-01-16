@@ -1,12 +1,11 @@
 package ru.bmn.web.hsdb.servlet;
 
+import ru.bmn.web.hsdb.domain.UserRegister;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import ru.bmn.web.hsdb.UserRegister;
-
 import java.io.IOException;
 import java.sql.Connection;
 
@@ -21,7 +20,7 @@ public class Login extends HttpServlet {
 		String email = req.getParameter("email");
 		String pass  = req.getParameter("password");
 
-		if (email != "" && pass != "") {
+		if (!email.isEmpty() && !pass.isEmpty()) {
 			UserRegister userRegister = new UserRegister(
 				(Connection)this.getServletContext().getAttribute("dbConnection"),
 				email,
@@ -30,7 +29,7 @@ public class Login extends HttpServlet {
 			
 			if (userRegister.exists()) {
 				req.getSession().setAttribute("userId", userRegister.getId());
-				resp.sendRedirect("/collection/out/");
+				resp.sendRedirect("/collection/in/");
 				return;
 			}
 			else {
