@@ -44,7 +44,7 @@ public class Error extends HttpServlet {
 			out.println("Servlet Name : " + servletName + "</br></br>");
 			out.println("Exception Type : " + throwable.getClass().getName() + "</br></br>");
 			out.println("The request URI: " + requestUri + "<br><br>");
-			out.println("The exception message: " + throwable.getMessage());
+			out.println("The exception message: <pre>" + throwable.getMessage() + "</pre>");
 			throwable.printStackTrace(out);
 		}
 		out.println("</body>");

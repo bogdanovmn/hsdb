@@ -23,7 +23,7 @@ public class Register extends HttpServlet {
         String passCheck = request.getParameter("password_check");
         String zombiCheck = request.getParameter("zombi_check");
 
-        String errorMsg = null;
+        String errorMsg = "";
         if (name.isEmpty() || email.isEmpty() || pass.isEmpty() || passCheck.isEmpty() || zombiCheck.isEmpty()) {
             errorMsg = "Все поля должны быть заполнены";
         }
@@ -43,8 +43,14 @@ public class Register extends HttpServlet {
 
             if (!newUser.exists()) {
                 newUser.create(name, request.getRemoteAddr());
-                request.getSession().setAttribute("userId", newUser.getId());
-                response.sendRedirect("/collection/in/");
+                if (newUser.exists()) {
+                    request.getSession().setAttribute("userId", newUser.getId());
+                    response.sendRedirect("../collection/in/");
+                    return;
+                }
+                else {
+                    errorMsg = "Ошибка добавления нового пользователя :(";
+                }
             }
         }
 

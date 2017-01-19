@@ -29,7 +29,7 @@ public class Login extends HttpServlet {
 			
 			if (userRegister.exists()) {
 				req.getSession().setAttribute("userId", userRegister.getId());
-				resp.sendRedirect("/collection/in/");
+				resp.sendRedirect("../collection/in/");
 				return;
 			}
 			else {

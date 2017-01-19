@@ -63,15 +63,10 @@ public class UserRegister {
 			stmt.setString(3, name);
 			stmt.setString(4, ip);
 
-			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
-				this.id = rs.getInt("id");
+			int rowsCnt = stmt.executeUpdate();
+			if (rowsCnt == 1) {
+				this.id = -1;
 			}
-			else {
-				this.id = 0;
-			}
-
-			rs.close();
 			stmt.close();
 		}
 		catch (SQLException e) {

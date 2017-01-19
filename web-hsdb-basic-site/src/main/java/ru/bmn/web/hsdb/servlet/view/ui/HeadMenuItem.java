@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb.servlet.ui;
+package ru.bmn.web.hsdb.servlet.view.ui;
 
 public class HeadMenuItem {
 	private final String id;
