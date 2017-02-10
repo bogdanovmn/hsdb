@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb;
+package ru.bmn.web.hsdb.domain;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,13 +7,13 @@ import java.sql.SQLException;
 
 public class UserRegister {
 	final private Connection connection;
-	final private String name;
+	final private String email;
 	final private String pass;
 	private int id = -1;
 	
-	public UserRegister(Connection connection, String name, String pass) {
+	public UserRegister(Connection connection, String email, String pass) {
 		this.connection = connection;
-		this.name       = name;
+		this.email      = email;
 		this.pass       = pass;
 	}
 	
@@ -33,7 +33,7 @@ public class UserRegister {
 				PreparedStatement stmt = this.connection.prepareStatement(
 					"SELECT id FROM users WHERE email = ? AND password = MD5(?)"
 				);
-				stmt.setString(1, this.name);
+				stmt.setString(1, this.email);
 				stmt.setString(2, this.pass);
 				ResultSet rs = stmt.executeQuery();
 				
@@ -49,6 +49,28 @@ public class UserRegister {
 			catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public void create(String name, String ip) {
+		try {
+			PreparedStatement stmt = this.connection.prepareStatement(
+				"INSERT INTO users SET email = ?, password = MD5(?), name = ?, ip = ?"
+			);
+
+			stmt.setString(1, this.email);
+			stmt.setString(2, this.pass);
+			stmt.setString(3, name);
+			stmt.setString(4, ip);
+
+			int rowsCnt = stmt.executeUpdate();
+			if (rowsCnt == 1) {
+				this.id = -1;
+			}
+			stmt.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }

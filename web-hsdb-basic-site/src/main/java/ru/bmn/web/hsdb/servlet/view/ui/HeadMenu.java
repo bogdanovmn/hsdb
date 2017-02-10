@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb;
+package ru.bmn.web.hsdb.servlet.view.ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,9 @@ public class HeadMenu {
 		
 	}
 
-	public List<HeadMenuItem> items() {
+	public List<HeadMenuItem> getItems() {
+		this.prepare();
+
 		for (HeadMenuItem headMenuItem : items) {
 			if (headMenuItem.is(this.current)) {
 				headMenuItem.select();
@@ -23,12 +25,13 @@ public class HeadMenu {
 		return null;
 	}
 	
-	private void _prepare() {
-		if(!this.isPrepared) {
-			this.items = new ArrayList<HeadMenuItem>(3); 
+	private void prepare() {
+		if (!this.isPrepared) {
+			this.items = new ArrayList<>(3);
 			this.items.add(new HeadMenuItem("collection_in" , "/collection/in/" , "Моя коллекция"));
 			this.items.add(new HeadMenuItem("collection_out", "/collection/out/", "Пополнить коллекцию"));
 			this.items.add(new HeadMenuItem("booster"       , "/booster/"       , "Купить бустер"));
 		}
+		this.isPrepared = true;
 	}
 }

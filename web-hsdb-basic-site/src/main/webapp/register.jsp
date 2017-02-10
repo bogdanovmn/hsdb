@@ -1,3 +1,5 @@
+<%@ page pageEncoding="UTF-8"%>
+
 <%@include file="inc/header_min.jsp"%>
 
 <h1>Регистрация</h1>

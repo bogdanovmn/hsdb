@@ -1,15 +1,18 @@
-package ru.bmn.web.hsdb;
+package ru.bmn.web.hsdb.domain;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UserCollection {
 	private final Connection connection;
 	private final int userId;
-	private boolean isAlreadyFetched = false;
+	private boolean isFetched = false;
+	private List<CollectionItem> items = new ArrayList<>();
 	
 	public UserCollection(Connection connection, int userId) {
 		this.connection = connection;
@@ -17,16 +20,22 @@ public class UserCollection {
 	}
 	
 	private void fetch() {
-		if (!this.isAlreadyFetched) {
+		if (!this.isFetched) {
 			try {
 				PreparedStatement stmt = this.connection.prepareStatement(
 					"SELECT * FROM collections WHERE user_id = ?"
 				);
 				stmt.setInt(1, this.userId);
-				ResultSet rs = stmt.executeQuery();
 
+				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					int card_id = rs.getInt("card_id");
+					this.items.add(
+						new CollectionItem(
+							rs.getInt("card_id"),
+							rs.getInt("norm_count"),
+							rs.getInt("gold_count")
+						)
+					);
 				}
 				rs.close();
 				stmt.close();
@@ -35,14 +44,18 @@ public class UserCollection {
 				e.printStackTrace();
 			}
 			finally {
-				this.isAlreadyFetched = true;
+				this.isFetched = true;
 			}
 		}
 	}
 
 	public int total() {
-		// TODO Auto-generated method stub
-		return 0;
+		this.fetch();
+		return items.size();
 	}
 
+	public List<CollectionItem> getItems() {
+		this.fetch();
+		return this.items;
+	}
 }
