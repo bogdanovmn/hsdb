@@ -30,6 +30,7 @@ public class CollectionIn extends HttpServlet {
 
 		ViewCollectionCards cards = new ViewCollectionCards(collection, boosterCards);
 
+
 		req.setAttribute("cards", cards.getInItems(characterFilter, rarityFilter, setFilter));
 
 		req.setAttribute("type", "in"); 
