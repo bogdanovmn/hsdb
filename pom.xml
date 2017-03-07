@@ -13,6 +13,7 @@
 	<modules>
 		<module>web-hsdb-basic-site</module>
 		<module>web-hsdb-basic-import</module>
+		
 	</modules>
 
 	<properties>
