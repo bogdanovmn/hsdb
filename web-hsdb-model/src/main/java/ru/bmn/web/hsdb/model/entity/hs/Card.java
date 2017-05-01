@@ -1,13 +1,20 @@
-package ru.bmn.web.hsdb.model.entity;
+package ru.bmn.web.hsdb.model.entity.hs;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(
+	uniqueConstraints = {
+		@UniqueConstraint(
+			columnNames = {"name"}
+		)
+	}
+)
 public class Card {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 
 	private String name;
 	private int manaCost;
@@ -30,7 +37,7 @@ public class Card {
 
 	@OneToOne
 	@JoinColumn(name = "release_id")
-	private Release release;
+	private Series series;
 
 	@OneToOne
 	@JoinColumn(name = "rarity_id")
@@ -43,131 +50,147 @@ public class Card {
 	@OneToMany(mappedBy = "card")
 	private Set<Sound> sound;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public Card setId(Integer id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public Card setName(String name) {
 		this.name = name;
+		return this;
 	}
 
 	public int getManaCost() {
 		return manaCost;
 	}
 
-	public void setManaCost(int manaCost) {
+	public Card setManaCost(int manaCost) {
 		this.manaCost = manaCost;
+		return this;
 	}
 
 	public int getAttack() {
 		return attack;
 	}
 
-	public void setAttack(int attack) {
+	public Card setAttack(int attack) {
 		this.attack = attack;
+		return this;
 	}
 
 	public int getHealth() {
 		return health;
 	}
 
-	public void setHealth(int health) {
+	public Card setHealth(int health) {
 		this.health = health;
+		return this;
 	}
 
 	public String getText() {
 		return text;
 	}
 
-	public void setText(String text) {
+	public Card setText(String text) {
 		this.text = text;
+		return this;
 	}
 
 	public String getAboutText() {
 		return aboutText;
 	}
 
-	public void setAboutText(String aboutText) {
+	public Card setAboutText(String aboutText) {
 		this.aboutText = aboutText;
+		return this;
 	}
 
 	public boolean isCollectible() {
 		return collectible;
 	}
 
-	public void setCollectible(boolean collectible) {
+	public Card setCollectible(boolean collectible) {
 		this.collectible = collectible;
+		return this;
 	}
 
 	public String getImageUrl() {
 		return imageUrl;
 	}
 
-	public void setImageUrl(String imageUrl) {
+	public Card setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+		return this;
 	}
 
 	public String getGoldImageUrl() {
 		return goldImageUrl;
 	}
 
-	public void setGoldImageUrl(String goldImageUrl) {
+	public Card setGoldImageUrl(String goldImageUrl) {
 		this.goldImageUrl = goldImageUrl;
+		return this;
 	}
 
 	public Type getType() {
 		return type;
 	}
 
-	public void setType(Type type) {
+	public Card setType(Type type) {
 		this.type = type;
+		return this;
 	}
 
 	public Race getRace() {
 		return race;
 	}
 
-	public void setRace(Race race) {
+	public Card setRace(Race race) {
 		this.race = race;
+		return this;
 	}
 
-	public Release getRelease() {
-		return release;
+	public Series getSeries() {
+		return series;
 	}
 
-	public void setRelease(Release release) {
-		this.release = release;
+	public Card setSeries(Series series) {
+		this.series = series;
+		return this;
 	}
 
 	public Rarity getRarity() {
 		return rarity;
 	}
 
-	public void setRarity(Rarity rarity) {
+	public Card setRarity(Rarity rarity) {
 		this.rarity = rarity;
+		return this;
 	}
 
 	public Artist getArtist() {
 		return artist;
 	}
 
-	public void setArtist(Artist artist) {
+	public Card setArtist(Artist artist) {
 		this.artist = artist;
+		return this;
 	}
 
 	public Set<Sound> getSound() {
 		return sound;
 	}
 
-	public void setSound(Set<Sound> sound) {
+	public Card setSound(Set<Sound> sound) {
 		this.sound = sound;
+		return this;
 	}
 }
