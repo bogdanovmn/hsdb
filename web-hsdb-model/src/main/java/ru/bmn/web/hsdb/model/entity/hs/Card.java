@@ -28,6 +28,10 @@ public class Card {
 	private String goldImageUrl;
 
 	@OneToOne
+	@JoinColumn(name = "character_id")
+	private CharacterClass character;
+
+	@OneToOne
 	@JoinColumn(name = "type_id")
 	private Type type;
 
@@ -36,7 +40,7 @@ public class Card {
 	private Race race;
 
 	@OneToOne
-	@JoinColumn(name = "release_id")
+	@JoinColumn(name = "series_id")
 	private Series series;
 
 	@OneToOne
@@ -49,6 +53,10 @@ public class Card {
 
 	@OneToMany(mappedBy = "card")
 	private Set<Sound> sound;
+
+	@ManyToMany(mappedBy = "cards")
+	private Set<Mechanic> mechanic;
+
 
 	public Integer getId() {
 		return id;

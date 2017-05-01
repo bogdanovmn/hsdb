@@ -25,6 +25,51 @@ public class CollectionItem {
 	@JoinColumn(name = "card_id")
 	private Card card;
 
-	private Integer normalCount;
-	private Integer goldCount;
+	private Integer normalCount = 0;
+	private Integer goldCount = 0;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public CollectionItem setId(Integer id) {
+		this.id = id;
+		return this;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public CollectionItem setUser(User user) {
+		this.user = user;
+		return this;
+	}
+
+	public Card getCard() {
+		return card;
+	}
+
+	public CollectionItem setCard(Card card) {
+		this.card = card;
+		return this;
+	}
+
+	public Integer getNormalCount() {
+		return normalCount;
+	}
+
+	public CollectionItem setNormalCount(Integer normalCount) {
+		this.normalCount = normalCount;
+		return this;
+	}
+
+	public Integer getGoldCount() {
+		return goldCount;
+	}
+
+	public CollectionItem setGoldCount(Integer goldCount) {
+		this.goldCount = goldCount;
+		return this;
+	}
 }
