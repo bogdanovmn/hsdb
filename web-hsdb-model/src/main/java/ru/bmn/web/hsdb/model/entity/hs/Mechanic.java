@@ -18,6 +18,7 @@ public class Mechanic {
 
 	private String name;
 	private String nameRu = "";
+	private String description;
 
 	@ManyToMany
 	@JoinTable(
@@ -60,6 +61,15 @@ public class Mechanic {
 
 	public Mechanic setCards(Set<Card> cards) {
 		this.cards = cards;
+		return this;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Mechanic setDescription(String description) {
+		this.description = description;
 		return this;
 	}
 }
