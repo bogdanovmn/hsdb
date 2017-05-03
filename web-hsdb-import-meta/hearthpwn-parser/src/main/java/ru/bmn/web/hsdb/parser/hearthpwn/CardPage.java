@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CardPage {
+/* default */ class CardPage {
     private static final UrlContentDiscCache CACHE = new UrlContentDiscCache(
         CardPage.class.toString()
     );

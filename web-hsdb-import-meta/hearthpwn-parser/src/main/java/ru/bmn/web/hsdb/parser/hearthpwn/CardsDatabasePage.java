@@ -1,5 +1,7 @@
 package ru.bmn.web.hsdb.parser.hearthpwn;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,7 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CardsDatabasePage {
+/* default */ class CardsDatabasePage {
+	private static final Logger LOG = LogManager.getLogger(CardsDatabasePage.class);
+
 	private static final String PREFIX = Site.PREFIX + "cards?display=1&filter-premium=1&page=";
 
 	private static final UrlContentDiscCache CACHE = new UrlContentDiscCache(
@@ -116,7 +120,9 @@ public class CardsDatabasePage {
 				.setSounds      (cardPage.getSounds())
 				.setText        (cardPage.getText());
 
+			LOG.info("Card '{}' parsed", card.getName());
 			result.add(card);
+			break;
 		}
 
 		return result;

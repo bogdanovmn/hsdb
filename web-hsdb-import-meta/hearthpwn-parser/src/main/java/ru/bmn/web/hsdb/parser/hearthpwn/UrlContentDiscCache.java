@@ -16,29 +16,32 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UrlContentDiscCache {
+/* default */ class UrlContentDiscCache {
     private static final String PROPERTY_BASE_DIR = "url_content_disc_cache.base_dir";
 
-    private final Path baseDir;
+    private Path baseDir;
     private final Map<String, File> files = new HashMap<>();
+    private final String tag;
 
     private boolean isInitialized = false;
 
 
-    UrlContentDiscCache(String tag) {
-        String baseDirProperty = System.getProperty(PROPERTY_BASE_DIR);
-        if (baseDirProperty.isEmpty()) {
-            throw new RuntimeException(
-                String.format("Cache base dir expected (use %s property)", PROPERTY_BASE_DIR)
-            );
-        }
-        this.baseDir = Paths.get(baseDirProperty, tag);
+    /* default */ UrlContentDiscCache(String tag) {
+        this.tag = tag;
     }
 
     private void init()
         throws IOException
     {
         if (!this.isInitialized) {
+            String baseDirProperty = System.getProperty(PROPERTY_BASE_DIR);
+            if (baseDirProperty.isEmpty()) {
+                throw new IOException(
+                    String.format("Cache base dir expected (use %s property)", PROPERTY_BASE_DIR)
+                );
+            }
+            this.baseDir = Paths.get(baseDirProperty, this.tag);
+
             if (!this.baseDir.toFile().exists()) {
                 Files.createDirectory(this.baseDir);
             }

@@ -30,11 +30,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>ru.bmn</groupId>
-            <artifactId>web-hsdb-model</artifactId>
-        </dependency>
-
     </dependencies>
     
 </project>
