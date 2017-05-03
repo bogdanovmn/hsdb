@@ -1,10 +1,15 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(
+	uniqueConstraints = {
+		@UniqueConstraint(
+			columnNames = {"name"}
+		)
+	}
+)
 public class Type {
 	@Id
 	@GeneratedValue

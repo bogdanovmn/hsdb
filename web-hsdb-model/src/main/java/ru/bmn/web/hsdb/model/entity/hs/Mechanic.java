@@ -4,10 +4,16 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(
+	uniqueConstraints = {
+		@UniqueConstraint(
+			columnNames = {"name"}
+		)
+	}
+)
 public class Mechanic {
 	@Id
 	@GeneratedValue
-//	@Column(name = "mechanic_id")
 	private Integer id;
 
 	private String name;

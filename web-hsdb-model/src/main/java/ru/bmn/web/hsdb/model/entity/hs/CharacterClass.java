@@ -1,10 +1,16 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(
+	uniqueConstraints = {
+		@UniqueConstraint(
+			columnNames = {"name"}
+		)
+	}
+)
 public class CharacterClass {
 	@Id
 	@GeneratedValue
@@ -12,6 +18,14 @@ public class CharacterClass {
 
 	private String name;
 	private String nameRu = "";
+
+	@ManyToMany
+	@JoinTable(
+		name = "card2class",
+		joinColumns = @JoinColumn(name = "class_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id")
+	)
+	private Set<Card> cards;
 
 
 	public Integer getId() {
@@ -37,6 +51,15 @@ public class CharacterClass {
 	}
 	public CharacterClass setNameRu(String nameRu) {
 		this.nameRu = nameRu;
+		return this;
+	}
+
+	public Set<Card> getCards() {
+		return cards;
+	}
+
+	public CharacterClass setCards(Set<Card> cards) {
+		this.cards = cards;
 		return this;
 	}
 }

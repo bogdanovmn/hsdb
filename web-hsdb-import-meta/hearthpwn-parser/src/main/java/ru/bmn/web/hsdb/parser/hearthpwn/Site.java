@@ -3,20 +3,32 @@ package ru.bmn.web.hsdb.parser.hearthpwn;
 
 import ru.bmn.web.hsdb.model.entity.hs.Card;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Site {
 	public static String PREFIX = "http://www.hearthpwn.com/";
-	private static String CARD_LIST_PREFIX = PREFIX + "cards?display=1&filter-premium=1&page=";
 
-	private String cachePrefix;
 
-	public Site(String cachePrefix) {
-		this.cachePrefix = cachePrefix;
+	public Site() {
 	}
 
-	public List<Card> getAllCards() {
-		CachedUrlContent urlContent = new CachedUrlContent(this.cachePrefix, CARD_LIST_PREFIX + 1);
+	public List<Card> getAllCards()
+		throws IOException
+	{
+		List<Card> result = new ArrayList<>();
+
+		CardsDatabasePage cardsDatabasePage = new CardsDatabasePage(1);
+		int totalPages = cardsDatabasePage.getPagesTotal();
+
+		result.addAll(cardsDatabasePage.getCards());
+
+		for (int i = 2; i < totalPages; i++) {
+			result.addAll(
+				new CardsDatabasePage(i).getCards()
+			);
+		}
 		return null;
 	}
 

@@ -23,13 +23,13 @@ public class Card {
 	private String text;
 	private String aboutText;
 	private boolean collectible;
+	private String externalUrl;
 
 	private String imageUrl;
 	private String goldImageUrl;
 
-	@OneToOne
-	@JoinColumn(name = "character_id")
-	private CharacterClass character;
+	@ManyToMany(mappedBy = "cards")
+	private Set<CharacterClass> characters;
 
 	@OneToOne
 	@JoinColumn(name = "type_id")
@@ -52,15 +52,15 @@ public class Card {
 	private Artist artist;
 
 	@OneToMany(mappedBy = "card")
-	private Set<Sound> sound;
+	private Set<Sound> sounds;
 
 	@ManyToMany(mappedBy = "cards")
 	private Set<Mechanic> mechanic;
 
-
 	public Integer getId() {
 		return id;
 	}
+
 
 	public Card setId(Integer id) {
 		this.id = id;
@@ -193,12 +193,39 @@ public class Card {
 		return this;
 	}
 
-	public Set<Sound> getSound() {
-		return sound;
+	public Set<Sound> getSounds() {
+		return sounds;
 	}
 
-	public Card setSound(Set<Sound> sound) {
-		this.sound = sound;
+	public Card setSounds(Set<Sound> sounds) {
+		this.sounds = sounds;
+		return this;
+	}
+
+	public Set<Mechanic> getMechanic() {
+		return mechanic;
+	}
+
+	public Card setMechanic(Set<Mechanic> mechanic) {
+		this.mechanic = mechanic;
+		return this;
+	}
+
+	public Set<CharacterClass> getCharacters() {
+		return characters;
+	}
+
+	public Card setCharacters(Set<CharacterClass> characters) {
+		this.characters = characters;
+		return this;
+	}
+
+	public String getExternalUrl() {
+		return externalUrl;
+	}
+
+	public Card setExternalUrl(String externalUrl) {
+		this.externalUrl = externalUrl;
 		return this;
 	}
 }
