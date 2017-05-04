@@ -11,12 +11,11 @@ import ru.bmn.web.hsdb.parser.hearthpwn.Site;
 import java.io.IOException;
 import java.util.List;
 
-@Service
 public class HearthpwnDatabaseImport {
 	private static final Logger LOG = LogManager.getLogger(HearthpwnDatabaseImport.class);
 
 	@Autowired
-	CardRepository cardRepository;
+	private CardRepository cardRepository;
 
 	public void run()
 		throws IOException

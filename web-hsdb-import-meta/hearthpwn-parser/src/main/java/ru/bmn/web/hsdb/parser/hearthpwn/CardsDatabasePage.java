@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 	private static final String PREFIX = Site.PREFIX + "cards?display=1&filter-premium=1&page=";
 
 	private static final UrlContentDiscCache CACHE = new UrlContentDiscCache(
-		CardsDatabasePage.class.toString()
+		CardsDatabasePage.class
 	);
 
 	private static final String DEFAULT_CHARACTER_CLASS_NAME = "Natural";
@@ -40,11 +40,14 @@ import java.util.stream.Collectors;
 	public int getPagesTotal()
 		throws IOException
 	{
-		Elements pagingElements = this.getHtmlDocument().select("ul[class^=b-pagination-list]");
+		Elements pagingElements = this.getHtmlDocument()
+			.select("ul[class^=b-pagination-list paging-list] li[class=b-pagination-item]");
+
 		int result = 1;
 		if (pagingElements.size() > 1) {
-			for (Element pageItem : pagingElements.select("li[class=b-pagination-item")) {
+			for (Element pageItem : pagingElements) {
 				if (!pageItem.text().equals("Next")) {
+					String t = pageItem.text();
 					result = Integer.valueOf(pageItem.text());
 				}
 			}
@@ -58,7 +61,7 @@ import java.util.stream.Collectors;
 		List<Card> result = new ArrayList<>();
 
 		Elements rows = this.getHtmlDocument()
-			.select("table[class^=listing listing-cards-tabular] tr[class=even || class=odd]");
+			.select("table[class^=listing listing-cards-tabular] tr[class~=^(even|odd)$]");
 
 		for (Element row : rows) {
 			Element nameElement = row.select("td[class=col-name").first();

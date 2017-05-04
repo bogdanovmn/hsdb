@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 /* default */ class CardPage {
     private static final UrlContentDiscCache CACHE = new UrlContentDiscCache(
-        CardPage.class.toString()
+        CardPage.class
     );
 
     private boolean isParsed = false;
