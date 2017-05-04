@@ -31,23 +31,23 @@ public class Card {
 	@ManyToMany(mappedBy = "cards")
 	private Set<CharacterClass> characters;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "type_id")
 	private Type type;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "race_id")
 	private Race race;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "series_id")
 	private Series series;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "rarity_id")
 	private Rarity rarity;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "artist_id")
 	private Artist artist;
 
