@@ -1,7 +1,6 @@
 package ru.bmn.web.hsdb.etl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.NoRepositoryBean;
 import ru.bmn.web.hsdb.model.entity.hs.*;
 import ru.bmn.web.hsdb.model.repository.hs.*;
 import ru.bmn.web.hsdb.model.repository.hs.common.EntityWithUniqueNameRepository;

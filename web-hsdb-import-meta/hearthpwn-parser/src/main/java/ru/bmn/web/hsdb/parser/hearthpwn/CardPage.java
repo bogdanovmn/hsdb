@@ -64,7 +64,7 @@ import java.util.stream.Collectors;
                         );
                 }
                 else if (qInfo.text().startsWith("Artist:")) {
-                    this.artist = new Artist()
+                    this.artist = (Artist) new Artist()
                         .setName(
                             qInfo.text().replaceFirst("Artist: ", "")
                         );
