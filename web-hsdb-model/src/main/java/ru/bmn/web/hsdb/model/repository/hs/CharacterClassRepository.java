@@ -1,8 +1,8 @@
 package ru.bmn.web.hsdb.model.repository.hs;
 
-import org.springframework.data.repository.CrudRepository;
 import ru.bmn.web.hsdb.model.entity.hs.CharacterClass;
+import ru.bmn.web.hsdb.model.repository.hs.common.EntityWithUniqueNameRepository;
 
 
-public interface CharacterClassRepository extends CrudRepository<CharacterClass, Integer> {
+public interface CharacterClassRepository extends EntityWithUniqueNameRepository<CharacterClass> {
 }

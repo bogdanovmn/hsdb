@@ -1,12 +1,14 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
+import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueName;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Artist {
+public class Artist extends EntityWithUniqueName {
 	@Id
 	@GeneratedValue
 	private Integer id;

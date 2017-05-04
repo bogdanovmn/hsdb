@@ -3,7 +3,6 @@ package ru.bmn.web.hsdb.etl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -16,9 +15,6 @@ public class Import {
 	public static void main(String[] args)
 		throws IOException
 	{
-		System.setProperty("org.hibernate.sql", "DEBUG");
-		System.setProperty("org.hibernate.type.descriptor.sql.BasicBinder", "TRACE");
-
 		SpringApplication.run(Import.class, args)
 			.getBean(HearthpwnDatabaseImport.class)
 				.run();
@@ -27,5 +23,10 @@ public class Import {
 	@Bean
 	public HearthpwnDatabaseImport getHearthpwnDatabaseImport() {
 		return new HearthpwnDatabaseImport();
+	}
+
+	@Bean
+	public EntityFactory getEntityFactory() {
+		return new EntityFactory();
 	}
 }

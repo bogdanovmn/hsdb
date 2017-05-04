@@ -1,8 +1,8 @@
 package ru.bmn.web.hsdb.model.repository.hs;
 
-import org.springframework.data.repository.CrudRepository;
 import ru.bmn.web.hsdb.model.entity.hs.Race;
+import ru.bmn.web.hsdb.model.repository.hs.common.EntityWithUniqueNameRepository;
 
 
-public interface RaceRepository extends CrudRepository<Race, Integer> {
+public interface RaceRepository extends EntityWithUniqueNameRepository<Race> {
 }

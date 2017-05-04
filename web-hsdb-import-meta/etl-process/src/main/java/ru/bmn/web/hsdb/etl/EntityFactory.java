@@ -1,9 +1,9 @@
 package ru.bmn.web.hsdb.etl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
-import ru.bmn.web.hsdb.model.entity.hs.Artist;
-import ru.bmn.web.hsdb.model.repository.hs.ArtistRepository;
+import org.springframework.data.repository.NoRepositoryBean;
+import ru.bmn.web.hsdb.model.entity.hs.*;
+import ru.bmn.web.hsdb.model.repository.hs.*;
 import ru.bmn.web.hsdb.model.repository.hs.common.EntityWithUniqueNameRepository;
 
 import java.util.HashMap;
@@ -14,25 +14,45 @@ public class EntityFactory {
 
 	@Autowired
 	ArtistRepository artistRepository;
+	@Autowired
+	CharacterClassRepository characterClassRepository;
+	@Autowired
+	RaceRepository raceRepository;
+	@Autowired
+	RarityRepository rarityRepository;
+	@Autowired
+	SeriesRepository seriesRepository;
+	@Autowired
+	TypeRepository typeRepository;
 
 	public EntityFactory() {}
 
 	public Object getEntityByName(Class<?> entityClass, String name) {
+		Object result = null;
+
 		if (!this.cache.containsKey(entityClass)) {
 			this.cache.put(entityClass, new HashMap<>());
 		}
 		if (!this.cache.get(entityClass).containsKey(name)) {
-			this.cache.get(entityClass)
-				.put(name, this.getEntityRepository(entityClass));
+			result = this.getEntityRepository(entityClass).findFirstByName(name);
+			this.cache.get(entityClass).put(name, result);
+		}
+		else {
+			result = this.cache.get(entityClass).get(name);
 		}
 
-		return null;
+		return result;
 	}
 
 	private EntityWithUniqueNameRepository getEntityRepository(Class<?> entityClass) {
 		EntityWithUniqueNameRepository result = null;
 
 		if (entityClass.equals(Artist.class)) result = this.artistRepository;
+		if (entityClass.equals(CharacterClass.class)) result = this.characterClassRepository;
+		if (entityClass.equals(Race.class)) result = this.raceRepository;
+		if (entityClass.equals(Rarity.class)) result = this.rarityRepository;
+		if (entityClass.equals(Series.class)) result = this.seriesRepository;
+		if (entityClass.equals(Type.class)) result = this.typeRepository;
 
 		return result;
 	}

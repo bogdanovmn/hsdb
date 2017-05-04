@@ -1,9 +1,9 @@
 package ru.bmn.web.hsdb.model.repository.hs;
 
-import org.springframework.data.repository.CrudRepository;
 import ru.bmn.web.hsdb.model.entity.hs.Card;
+import ru.bmn.web.hsdb.model.repository.hs.common.EntityWithUniqueNameRepository;
 
 
-public interface CardRepository extends CrudRepository<Card, Integer> {
-	public Card findFirstByName(String name);
+public interface CardRepository extends EntityWithUniqueNameRepository<Card> {
+	Card findFirstByName(String name);
 }
