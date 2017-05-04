@@ -16,15 +16,22 @@ public class Card {
 	@GeneratedValue
 	private Integer id;
 
+	@Column(nullable = false)
 	private String name;
+
+	@Column(nullable = false)
 	private int manaCost;
+
+	@Column(nullable = false)
+	private boolean collectible;
+
 	private int attack;
 	private int health;
 	private String text;
 	private String aboutText;
-	private boolean collectible;
 	private String externalUrl;
 
+	@Column(nullable = false)
 	private String imageUrl;
 	private String goldImageUrl;
 
@@ -57,10 +64,28 @@ public class Card {
 	@ManyToMany(mappedBy = "cards")
 	private Set<Mechanic> mechanic;
 
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (this.name == null || obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		Card that = (Card) obj;
+		return this.name.equals(that.name);
+	}
+	@Override
+	public int hashCode() {
+		return this.name == null ? 0 : this.name.hashCode();
+	}
+
+
+
 	public Integer getId() {
 		return id;
 	}
-
 
 	public Card setId(Integer id) {
 		this.id = id;

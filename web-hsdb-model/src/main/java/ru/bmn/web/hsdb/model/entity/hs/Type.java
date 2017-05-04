@@ -15,6 +15,7 @@ public class Type {
 	@GeneratedValue
 	private Integer id;
 
+	@Column(nullable = false)
 	private String name;
 	private String nameRu = "";
 

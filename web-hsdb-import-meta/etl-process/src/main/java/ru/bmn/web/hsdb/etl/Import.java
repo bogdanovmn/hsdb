@@ -16,10 +16,12 @@ public class Import {
 	public static void main(String[] args)
 		throws IOException
 	{
-		ConfigurableApplicationContext context = SpringApplication.run(Import.class, args);
+		System.setProperty("org.hibernate.sql", "DEBUG");
+		System.setProperty("org.hibernate.type.descriptor.sql.BasicBinder", "TRACE");
 
-		 context.getBean(HearthpwnDatabaseImport.class)
-			 .run();
+		SpringApplication.run(Import.class, args)
+			.getBean(HearthpwnDatabaseImport.class)
+				.run();
 	}
 
 	@Bean

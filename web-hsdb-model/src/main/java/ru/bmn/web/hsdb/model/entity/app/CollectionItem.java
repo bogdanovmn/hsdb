@@ -25,7 +25,9 @@ public class CollectionItem {
 	@JoinColumn(name = "card_id")
 	private Card card;
 
+	@Column(nullable = false)
 	private Integer normalCount = 0;
+	@Column(nullable = false)
 	private Integer goldCount = 0;
 
 	public Integer getId() {

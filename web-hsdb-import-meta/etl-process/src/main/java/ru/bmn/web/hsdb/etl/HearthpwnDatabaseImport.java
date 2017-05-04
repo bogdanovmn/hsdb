@@ -24,6 +24,12 @@ public class HearthpwnDatabaseImport {
 		List<Card> allCards = new Site().getAllCards();
 
 		LOG.info("Import {} cards...", allCards.size());
-		this.cardRepository.save(allCards);
+		for (Card newCard : allCards) {
+			Card currentCard = this.cardRepository.findFirstByName(newCard.getName());
+			if (currentCard != null) {
+				newCard.setId(currentCard.getId());
+			}
+			this.cardRepository.save(newCard);
+		}
 	}
 }

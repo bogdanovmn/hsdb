@@ -1,5 +1,6 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +11,9 @@ public class Artist {
 	@GeneratedValue
 	private Integer id;
 
+	@Column(nullable = false)
 	private String name;
+
 
 	public Integer getId() {
 		return id;

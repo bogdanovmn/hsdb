@@ -17,9 +17,13 @@ public class User {
 	@GeneratedValue
 	private Integer id;
 
+	@Column(nullable = false)
 	private String name;
+	@Column(nullable = false)
 	private String email;
+	@Column(nullable = false)
 	private String passwordHash;
+	@Column(nullable = false)
 	private Date registerDate;
 
 	@OneToMany(mappedBy = "user")
