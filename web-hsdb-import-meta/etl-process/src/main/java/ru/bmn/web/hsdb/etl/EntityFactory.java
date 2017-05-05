@@ -40,11 +40,14 @@ public class EntityFactory {
 		}
 
 		if (!this.cache.get(entityClass).containsKey(name)) {
-			result = this.getEntityRepository(entityClass).findFirstByName(name);
+			EntityWithUniqueNameRepository repository = this.getEntityRepository(entityClass);
+			result = repository.findFirstByName(name);
+
 			if (result != null) {
 				this.cache.get(entityClass).put(name, result);
 			}
 			else {
+				repository.save(entity);
 				result = entity;
 			}
 		}

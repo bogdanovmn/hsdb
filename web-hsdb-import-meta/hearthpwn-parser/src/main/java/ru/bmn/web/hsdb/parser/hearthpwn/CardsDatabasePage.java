@@ -125,7 +125,7 @@ import java.util.stream.Collectors;
 
 			LOG.info("Card '{}' parsed", card.getName());
 			result.add(card);
-			break;
+//			break;
 		}
 
 		return result;

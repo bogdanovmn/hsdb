@@ -26,19 +26,19 @@ public class Site {
 		LOG.info("Get all cards start process...");
 
 		CardsDatabasePage cardsDatabasePage = new CardsDatabasePage(1);
-		int totalPages = cardsDatabasePage.getPagesTotal();
+		int totalPages = 2;//cardsDatabasePage.getPagesTotal();
 
 		LOG.info("First page fetched, total pages: {}", totalPages);
 
 		LOG.info("Parse first page...");
 		result.addAll(cardsDatabasePage.getCards());
 
-//		for (int i = 2; i < totalPages; i++) {
-//			LOG.info("Parse page #{}...", i);
-//			result.addAll(
-//				new CardsDatabasePage(i).getCards()
-//			);
-//		}
+		for (int i = 2; i <= totalPages; i++) {
+			LOG.info("Parse page #{}...", i);
+			result.addAll(
+				new CardsDatabasePage(i).getCards()
+			);
+		}
 
 		LOG.info("All cards parsed!");
 		return result;

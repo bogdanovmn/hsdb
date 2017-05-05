@@ -26,23 +26,23 @@ public class Card extends EntityWithUniqueName {
 	@ManyToMany(mappedBy = "cards")
 	private Set<CharacterClass> characters;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "type_id")
 	private Type type;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "race_id")
 	private Race race;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "series_id")
 	private Series series;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "rarity_id")
 	private Rarity rarity;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "artist_id")
 	private Artist artist;
 
