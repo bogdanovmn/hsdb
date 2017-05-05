@@ -32,25 +32,25 @@ public class HearthpwnDatabaseImport {
 			}
 
 			newCard.setArtist(
-				(Artist) this.entityFactory.getEntityByName(Artist.class, newCard.getArtist().getName())
+				(Artist) this.entityFactory.getPersistEntity(newCard.getArtist())
 			);
 
 			newCard.setRace(
 				newCard.getRace() != null
-					? (Race) this.entityFactory.getEntityByName(Race.class, newCard.getRace().getName())
+					? (Race) this.entityFactory.getPersistEntity(newCard.getRace())
 					: null
 			);
 
 			newCard.setRarity(
-				(Rarity) this.entityFactory.getEntityByName(Rarity.class, newCard.getRarity().getName())
+				(Rarity) this.entityFactory.getPersistEntity(newCard.getRarity())
 			);
 
 			newCard.setSeries(
-				(Series) this.entityFactory.getEntityByName(Series.class, newCard.getSeries().getName())
+				(Series) this.entityFactory.getPersistEntity(newCard.getSeries())
 			);
 
 			newCard.setType(
-				(Type) this.entityFactory.getEntityByName(Type.class, newCard.getType().getName())
+				(Type) this.entityFactory.getPersistEntity(newCard.getType())
 			);
 
 			this.cardRepository.save(newCard);
