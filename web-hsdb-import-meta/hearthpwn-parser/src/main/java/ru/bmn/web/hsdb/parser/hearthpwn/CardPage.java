@@ -46,19 +46,19 @@ import java.util.stream.Collectors;
 
             for (Element qInfo : this.htmlDocument.select("aside[class^=infobox] ul li")) {
                 if (qInfo.text().startsWith("Rarity:")) {
-                    this.rarity = new Rarity()
+                    this.rarity = (Rarity) new Rarity()
                         .setName(
                             qInfo.select("a").first().text()
                         );
                 }
                 else if (qInfo.text().startsWith("Set:")) {
-                    this.series = new Series()
+                    this.series = (Series) new Series()
                         .setName(
                             qInfo.select("a").first().text()
                         );
                 }
                 else if (qInfo.text().startsWith("Race:")) {
-                    this.race = new Race()
+                    this.race = (Race) new Race()
                         .setName(
                             qInfo.select("a").first().text()
                         );
@@ -82,9 +82,9 @@ import java.util.stream.Collectors;
                         this.text = infoDiv.select("p").first().text();
                         this.mechanics = infoDiv.select("span[class*=mechanics]").stream()
                             .map(
-                                x -> new Mechanic()
-                                    .setName(x.text())
+                                x -> (Mechanic) new Mechanic()
                                     .setDescription(x.attr("title"))
+                                    .setName(x.text())
                             )
                             .collect(
                                 Collectors.toSet()

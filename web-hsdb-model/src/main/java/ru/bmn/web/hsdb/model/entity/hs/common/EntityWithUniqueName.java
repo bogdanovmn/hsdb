@@ -1,22 +1,18 @@
 package ru.bmn.web.hsdb.model.entity.hs.common;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-@Table(
-	uniqueConstraints = {
-		@UniqueConstraint(
-			columnNames = {"name"}
-		)
-	}
-)
 public abstract class EntityWithUniqueName {
 	@Id
 	@GeneratedValue
-	protected Integer id;
+	private Integer id;
 
-	@Column(nullable = false)
-	protected String name;
+	@Column(unique = true, nullable = false)
+	private String name;
 
 
 	public Integer getId() {

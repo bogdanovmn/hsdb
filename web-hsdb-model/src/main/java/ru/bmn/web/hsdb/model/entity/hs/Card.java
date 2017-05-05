@@ -1,24 +1,12 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
+import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueName;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(
-	uniqueConstraints = {
-		@UniqueConstraint(
-			columnNames = {"name"}
-		)
-	}
-)
-public class Card {
-	@Id
-	@GeneratedValue
-	private Integer id;
-
-	@Column(nullable = false)
-	private String name;
-
+public class Card extends EntityWithUniqueName {
 	@Column(nullable = false)
 	private int manaCost;
 
@@ -70,36 +58,17 @@ public class Card {
 		if (this == obj) {
 			return true;
 		}
-		if (this.name == null || obj == null || getClass() != obj.getClass()) {
+		if (this.getName() == null || obj == null || getClass() != obj.getClass()) {
 			return false;
 		}
 		Card that = (Card) obj;
-		return this.name.equals(that.name);
+		return this.getName().equals(that.getName());
 	}
 	@Override
 	public int hashCode() {
-		return this.name == null ? 0 : this.name.hashCode();
+		return this.getName() == null ? 0 : this.getName().hashCode();
 	}
 
-
-
-	public Integer getId() {
-		return id;
-	}
-
-	public Card setId(Integer id) {
-		this.id = id;
-		return this;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public Card setName(String name) {
-		this.name = name;
-		return this;
-	}
 
 	public int getManaCost() {
 		return manaCost;
