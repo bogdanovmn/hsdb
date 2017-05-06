@@ -10,12 +10,7 @@ import java.util.Set;
 
 @Entity
 public class CharacterClass extends EntityWithUniqueNameTranslatable {
-	@ManyToMany
-	@JoinTable(
-		name = "card2class",
-		joinColumns = @JoinColumn(name = "class_id", referencedColumnName = "id"),
-		inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id")
-	)
+	@ManyToMany(mappedBy = "characters")
 	private Set<Card> cards;
 
 	public Set<Card> getCards() {

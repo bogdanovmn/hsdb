@@ -14,7 +14,6 @@ public class Sound {
 	private String url;
 
 	@ManyToOne
-	@JoinColumn(name = "card_id")
 	private Card card;
 
 	public Integer getId() {

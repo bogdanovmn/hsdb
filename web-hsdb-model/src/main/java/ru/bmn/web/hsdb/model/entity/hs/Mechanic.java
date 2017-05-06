@@ -2,22 +2,14 @@ package ru.bmn.web.hsdb.model.entity.hs;
 
 import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueNameTranslatable;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Mechanic extends EntityWithUniqueNameTranslatable {
 	private String description;
 
-	@ManyToMany
-	@JoinTable(
-		name = "card2mechanic",
-		joinColumns = @JoinColumn(name = "mechanic_id", referencedColumnName = "id"),
-		inverseJoinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id")
-	)
+	@ManyToMany(mappedBy = "mechanic")
 	private Set<Card> cards;
 
 	public Set<Card> getCards() {

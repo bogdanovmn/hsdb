@@ -32,4 +32,28 @@ public abstract class EntityWithUniqueName {
 		this.name = name;
 		return this;
 	}
+
+	@Override
+	public boolean equals(Object thatObj) {
+		if (this == thatObj) {
+			return true;
+		}
+		if (thatObj == null || getClass() != thatObj.getClass()) {
+			return false;
+		}
+		if (this.getName() == null) {
+			return false;
+		}
+
+		EntityWithUniqueName that = (EntityWithUniqueName) thatObj;
+
+		return this.getName().equals(that.getName());
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getName() == null
+			? 0
+			: this.getName().hashCode();
+	}
 }

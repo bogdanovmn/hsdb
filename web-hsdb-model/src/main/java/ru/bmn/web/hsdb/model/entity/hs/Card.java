@@ -3,10 +3,15 @@ package ru.bmn.web.hsdb.model.entity.hs;
 import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueName;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Card extends EntityWithUniqueName {
+//	@Id
+//	@GeneratedValue
+//	private Integer id;
+
 	@Column(nullable = false)
 	private int manaCost;
 
@@ -23,8 +28,6 @@ public class Card extends EntityWithUniqueName {
 	private String imageUrl;
 	private String goldImageUrl;
 
-	@ManyToMany(mappedBy = "cards")
-	private Set<CharacterClass> characters;
 
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "type_id")
@@ -46,28 +49,25 @@ public class Card extends EntityWithUniqueName {
 	@JoinColumn(name = "artist_id")
 	private Artist artist;
 
-	@OneToMany(mappedBy = "card")
+	@OneToMany
+	@JoinColumn(name = "card_id")
 	private Set<Sound> sounds;
 
-	@ManyToMany(mappedBy = "cards")
+	@ManyToMany
+	@JoinTable(
+		name = "card2class",
+		joinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "class_id", referencedColumnName = "id")
+	)
+	private Set<CharacterClass> characters;
+
+	@ManyToMany
+	@JoinTable(
+		name = "card2mechanic",
+		joinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "mechanic_id", referencedColumnName = "id")
+	)
 	private Set<Mechanic> mechanic;
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (this.getName() == null || obj == null || getClass() != obj.getClass()) {
-			return false;
-		}
-		Card that = (Card) obj;
-		return this.getName().equals(that.getName());
-	}
-	@Override
-	public int hashCode() {
-		return this.getName() == null ? 0 : this.getName().hashCode();
-	}
 
 
 	public int getManaCost() {
