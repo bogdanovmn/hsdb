@@ -3,14 +3,12 @@ package ru.bmn.web.hsdb.etl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import ru.bmn.web.hsdb.model.entity.hs.*;
-import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueName;
 import ru.bmn.web.hsdb.model.repository.hs.CardRepository;
+import ru.bmn.web.hsdb.model.repository.hs.SoundRepository;
 import ru.bmn.web.hsdb.parser.hearthpwn.Site;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,6 +20,8 @@ public class HearthpwnDatabaseImport {
 	private EntityFactory entityFactory;
 	@Autowired
 	private CardRepository cardRepository;
+	@Autowired
+	private SoundRepository soundRepository;
 
 	public void run()
 		throws IOException
@@ -44,8 +44,8 @@ public class HearthpwnDatabaseImport {
 		}
 	}
 
-	@Transactional
-	void updateCard(Card card) {
+//	@Transactional
+	private void updateCard(Card card) {
 		card.setArtist(
 			(Artist) this.entityFactory.getPersistEntity(card.getArtist())
 		);
@@ -90,7 +90,10 @@ public class HearthpwnDatabaseImport {
 			card.setCharacters(persistChars);
 		}
 
-		card.setSounds(null);
+		if (card.getId() != null) {
+			this.soundRepository.deleteByCardId(card.getId());
+		}
+
 		this.cardRepository.save(card);
 	}
 }

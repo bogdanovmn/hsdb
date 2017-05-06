@@ -2,7 +2,8 @@ package ru.bmn.web.hsdb.model.entity.hs;
 
 import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueNameTranslatable;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity

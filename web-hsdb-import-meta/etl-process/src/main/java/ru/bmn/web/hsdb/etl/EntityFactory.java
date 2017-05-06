@@ -1,7 +1,5 @@
 package ru.bmn.web.hsdb.etl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.bmn.web.hsdb.model.entity.hs.*;
 import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueName;
@@ -12,8 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EntityFactory {
-//	private static final Logger LOG = LogManager.getLogger(HearthpwnDatabaseImport.class);
-
 	private final Map<Class<?>, Map<String, EntityWithUniqueName>> cache = new HashMap<>();
 
 	@Autowired

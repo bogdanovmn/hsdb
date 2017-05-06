@@ -3,7 +3,6 @@ package ru.bmn.web.hsdb.model.entity.hs;
 import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueName;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -49,7 +48,7 @@ public class Card extends EntityWithUniqueName {
 	@JoinColumn(name = "artist_id")
 	private Artist artist;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "card_id")
 	private Set<Sound> sounds;
 

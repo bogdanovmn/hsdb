@@ -51,4 +51,23 @@ public class Sound {
 		this.card = card;
 		return this;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Sound sound = (Sound) o;
+
+		return
+			getName().equals(sound.getName())
+				&& getUrl().equals(sound.getUrl());
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getName().hashCode();
+		result = 31 * result + getUrl().hashCode();
+		return result;
+	}
 }
