@@ -1,48 +1,9 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
-import javax.persistence.*;
+import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueNameTranslatable;
+
+import javax.persistence.Entity;
 
 @Entity
-@Table(
-	uniqueConstraints = {
-		@UniqueConstraint(
-			columnNames = {"name"}
-		)
-	}
-)
-public class Rarity {
-	@Id
-	@GeneratedValue
-	private Integer id;
-
-	@Column(nullable = false)
-	private String name;
-	private String nameRu = "";
-
-	public Integer getId() {
-		return id;
-	}
-
-	public Rarity setId(Integer id) {
-		this.id = id;
-		return this;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public Rarity setName(String name) {
-		this.name = name;
-		return this;
-	}
-
-	public String getNameRu() {
-		return nameRu;
-	}
-
-	public Rarity setNameRu(String nameRu) {
-		this.nameRu = nameRu;
-		return this;
-	}
+public class Rarity extends EntityWithUniqueNameTranslatable {
 }

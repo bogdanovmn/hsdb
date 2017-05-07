@@ -1,8 +1,7 @@
 package ru.bmn.web.hsdb.model.repository.hs;
 
-import org.springframework.data.repository.CrudRepository;
 import ru.bmn.web.hsdb.model.entity.hs.Mechanic;
+import ru.bmn.web.hsdb.model.repository.hs.common.EntityWithUniqueNameRepository;
 
-
-public interface MechanicRepository extends CrudRepository<Mechanic, Integer> {
+public interface MechanicRepository extends EntityWithUniqueNameRepository<Mechanic> {
 }

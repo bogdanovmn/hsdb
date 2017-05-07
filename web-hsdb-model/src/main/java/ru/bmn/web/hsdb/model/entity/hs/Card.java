@@ -1,23 +1,15 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
+import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueName;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(
-	uniqueConstraints = {
-		@UniqueConstraint(
-			columnNames = {"name"}
-		)
-	}
-)
-public class Card {
-	@Id
-	@GeneratedValue
-	private Integer id;
-
-	@Column(nullable = false)
-	private String name;
+public class Card extends EntityWithUniqueName {
+//	@Id
+//	@GeneratedValue
+//	private Integer id;
 
 	@Column(nullable = false)
 	private int manaCost;
@@ -35,71 +27,47 @@ public class Card {
 	private String imageUrl;
 	private String goldImageUrl;
 
-	@ManyToMany(mappedBy = "cards")
-	private Set<CharacterClass> characters;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "type_id")
 	private Type type;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "race_id")
 	private Race race;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "series_id")
 	private Series series;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "rarity_id")
 	private Rarity rarity;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "artist_id")
 	private Artist artist;
 
-	@OneToMany(mappedBy = "card")
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "card_id")
 	private Set<Sound> sounds;
 
-	@ManyToMany(mappedBy = "cards")
+	@ManyToMany
+	@JoinTable(
+		name = "card2class",
+		joinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "class_id", referencedColumnName = "id")
+	)
+	private Set<CharacterClass> characters;
+
+	@ManyToMany
+	@JoinTable(
+		name = "card2mechanic",
+		joinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "mechanic_id", referencedColumnName = "id")
+	)
 	private Set<Mechanic> mechanic;
 
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (this.name == null || obj == null || getClass() != obj.getClass()) {
-			return false;
-		}
-		Card that = (Card) obj;
-		return this.name.equals(that.name);
-	}
-	@Override
-	public int hashCode() {
-		return this.name == null ? 0 : this.name.hashCode();
-	}
-
-
-
-	public Integer getId() {
-		return id;
-	}
-
-	public Card setId(Integer id) {
-		this.id = id;
-		return this;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public Card setName(String name) {
-		this.name = name;
-		return this;
-	}
 
 	public int getManaCost() {
 		return manaCost;

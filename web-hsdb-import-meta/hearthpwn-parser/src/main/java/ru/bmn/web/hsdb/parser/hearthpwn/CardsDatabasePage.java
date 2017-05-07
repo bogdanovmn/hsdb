@@ -63,6 +63,7 @@ import java.util.stream.Collectors;
 		Elements rows = this.getHtmlDocument()
 			.select("table[class^=listing listing-cards-tabular] tr[class~=^(even|odd)$]");
 
+		int i = 0;
 		for (Element row : rows) {
 			Element nameElement = row.select("td[class=col-name").first();
 			URL cardPageUrl = new URL(
@@ -72,60 +73,61 @@ import java.util.stream.Collectors;
 			CardPage cardPage = new CardPage(cardPageUrl);
 			cardPage.parse();
 
-			Card card = new Card()
-				.setName(
-					nameElement.text()
+			Card card = new Card();
+			card.setName(
+				nameElement.text()
+			);
+			card.setType(
+				(Type) new Type().setName(
+					row.select("td[class=col-type").first().text()
 				)
-				.setType(
-					new Type().setName(
-						row.select("td[class=col-type").first().text()
+			)
+			.setManaCost(
+				Integer.valueOf(
+					row.select("td[class=col-cost").first().text()
+				)
+			)
+			.setAttack(
+				Integer.valueOf(
+					row.select("td[class=col-attack").first().text()
+				)
+			)
+			.setHealth(
+				Integer.valueOf(
+					row.select("td[class=col-health").first().text()
+				)
+			)
+			.setCharacters(
+				Arrays.stream(
+					row.select("td[class=col-class")
+						.first().text().split("\\s?,\\s?")
+				)
+				.map(x -> (CharacterClass) new CharacterClass()
+					.setName(
+						x.isEmpty()
+							? DEFAULT_CHARACTER_CLASS_NAME
+							: x
 					)
 				)
-				.setManaCost(
-					Integer.valueOf(
-						row.select("td[class=col-cost").first().text()
-					)
-				)
-				.setAttack(
-					Integer.valueOf(
-						row.select("td[class=col-attack").first().text()
-					)
-				)
-				.setHealth(
-					Integer.valueOf(
-						row.select("td[class=col-health").first().text()
-					)
-				)
-				.setCharacters(
-					Arrays.stream(
-						row.select("td[class=col-class")
-							.first().text().split("\\s?,\\s?")
-					)
-					.map(x -> new CharacterClass()
-						.setName(
-							x.isEmpty()
-								? DEFAULT_CHARACTER_CLASS_NAME
-								: x
-						)
-					)
-					.collect(Collectors.toSet())
-				)
-				.setExternalUrl (cardPageUrl.toString())
-				.setAboutText   (cardPage.getAboutText())
-				.setArtist      (cardPage.getArtist())
-				.setCollectible (cardPage.isCollectible())
-				.setImageUrl    (cardPage.getImageUrl())
-				.setGoldImageUrl(cardPage.getGoldImageUrl())
-				.setMechanic    (cardPage.getMechanics())
-				.setRace        (cardPage.getRace())
-				.setRarity      (cardPage.getRarity())
-				.setSeries      (cardPage.getSeries())
-				.setSounds      (cardPage.getSounds())
-				.setText        (cardPage.getText());
+				.collect(Collectors.toSet())
+			)
+			.setExternalUrl (cardPageUrl.toString())
+			.setAboutText   (cardPage.getAboutText())
+			.setArtist      (cardPage.getArtist())
+			.setCollectible (cardPage.isCollectible())
+			.setImageUrl    (cardPage.getImageUrl())
+			.setGoldImageUrl(cardPage.getGoldImageUrl())
+			.setMechanic    (cardPage.getMechanics())
+			.setRace        (cardPage.getRace())
+			.setRarity      (cardPage.getRarity())
+			.setSeries      (cardPage.getSeries())
+			.setSounds      (cardPage.getSounds())
+			.setText        (cardPage.getText());
 
 			LOG.info("Card '{}' parsed", card.getName());
 			result.add(card);
-			break;
+
+			if (i++ > 10) break;
 		}
 
 		return result;
