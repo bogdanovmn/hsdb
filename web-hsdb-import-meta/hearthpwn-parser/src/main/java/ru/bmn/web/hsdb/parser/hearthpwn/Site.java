@@ -3,11 +3,13 @@ package ru.bmn.web.hsdb.parser.hearthpwn;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.bmn.web.hsdb.model.entity.app.CollectionItem;
 import ru.bmn.web.hsdb.model.entity.hs.Card;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Site {
 	private static final Logger LOG = LogManager.getLogger(Site.class);
@@ -44,7 +46,9 @@ public class Site {
 		return result;
 	}
 
-	public List<Card> getUserCards(String userName) {
-		return null;
+	public Set<CollectionItem> getUserCards(String userName)
+		throws IOException
+	{
+		return new UserCollectionPage(userName).getCollection();
 	}
 }

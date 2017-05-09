@@ -9,7 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "ru.bmn.web.hsdb.model.repository")
 @EntityScan(basePackages = "ru.bmn.web.hsdb.model.entity")
 public class App {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		SpringApplication.run(App.class, args);
 	}
 }
+

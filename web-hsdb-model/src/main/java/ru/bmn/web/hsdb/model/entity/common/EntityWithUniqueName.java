@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb.model.entity.hs.common;
+package ru.bmn.web.hsdb.model.entity.common;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

@@ -1,10 +1,10 @@
 package ru.bmn.web.hsdb.etl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
 import ru.bmn.web.hsdb.model.entity.hs.*;
-import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueName;
+import ru.bmn.web.hsdb.model.repository.common.EntityWithUniqueNameRepository;
 import ru.bmn.web.hsdb.model.repository.hs.*;
-import ru.bmn.web.hsdb.model.repository.hs.common.EntityWithUniqueNameRepository;
 
 import java.util.HashMap;
 import java.util.Map;

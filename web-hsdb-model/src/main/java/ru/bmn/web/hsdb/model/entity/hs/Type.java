@@ -1,6 +1,6 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
-import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueNameTranslatable;
+import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueNameTranslatable;
 
 import javax.persistence.Entity;
 

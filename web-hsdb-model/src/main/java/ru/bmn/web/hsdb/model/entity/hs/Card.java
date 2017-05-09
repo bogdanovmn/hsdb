@@ -1,16 +1,12 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
-import ru.bmn.web.hsdb.model.entity.hs.common.EntityWithUniqueName;
+import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Card extends EntityWithUniqueName {
-//	@Id
-//	@GeneratedValue
-//	private Integer id;
-
 	@Column(nullable = false)
 	private int manaCost;
 

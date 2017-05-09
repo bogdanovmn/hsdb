@@ -44,7 +44,6 @@ public class HearthpwnDatabaseImport {
 		}
 	}
 
-//	@Transactional
 	private void updateCard(Card card) {
 		card.setArtist(
 			(Artist) this.entityFactory.getPersistEntity(card.getArtist())
