@@ -22,7 +22,7 @@ public class User extends EntityWithUniqueName {
 	@OneToMany(mappedBy = "user")
 	private Set<CollectionItem> collection;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(
 		name = "role2user",
 		joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

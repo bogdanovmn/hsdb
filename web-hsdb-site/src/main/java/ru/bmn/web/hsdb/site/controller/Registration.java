@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +16,11 @@ import ru.bmn.web.hsdb.site.controller.domain.UserRegistrationForm;
 import ru.bmn.web.hsdb.site.security.HsdbSecurityService;
 
 import javax.validation.Valid;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class Registration {
@@ -36,9 +41,31 @@ public class Registration {
 	@PostMapping("/registration")
 	public ModelAndView registration(
 		@Valid UserRegistrationForm userForm,
-		BindingResult bindingResult
+		BindingResult bindingResult,
+		Model model
 	) {
+		Map<String, String> fieldError = new HashMap<>();
 		if (bindingResult.hasErrors()) {
+			fieldError = bindingResult.getFieldErrors().stream()
+				.collect(
+					Collectors.toMap(
+						FieldError::getField,
+						FieldError::getDefaultMessage)
+				);
+
+		}
+
+		if (!userForm.getPassword().equals(userForm.getPasswordConfirm())) {
+			fieldError.put("passwordConfirm", "Пароль не совпадает");
+		}
+
+		if (fieldError.size() > 0) {
+			model.addAttribute("fieldError", fieldError);
+			return new ModelAndView("registration");
+		}
+
+		if (this.userRepository.findFirstByName(userForm.getName()) != null) {
+			model.addAttribute("error", "Пользователь с таким именем ужу существует");
 			return new ModelAndView("registration");
 		}
 
@@ -55,9 +82,10 @@ public class Registration {
 						userForm.getPassword().getBytes()
 					)
 				)
+				.setRegisterDate(new Date())
 				.setRoles(
 					new HashSet<UserRole>() {{
-						add(new UserRole().setName("User"));
+						add((UserRole) new UserRole().setName("User"));
 					}}
 				)
 				.setName(

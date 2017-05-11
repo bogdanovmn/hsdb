@@ -1,5 +1,7 @@
 package ru.bmn.web.hsdb.model.entity.app;
 
+import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,33 +9,10 @@ import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
-public class UserRole {
-	@Id
-	@GeneratedValue
-	private Integer id;
-
-	private String name;
-
+public class UserRole extends EntityWithUniqueName{
 	@ManyToMany(mappedBy = "roles")
 	private Set<User> users;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public UserRole setId(Integer id) {
-		this.id = id;
-		return this;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public UserRole setName(String name) {
-		this.name = name;
-		return this;
-	}
 
 	public Set<User> getUsers() {
 		return users;

@@ -7,21 +7,22 @@
 		<table>
 		<tr>
 			<td>E-mail
-			<td><input type=text name=email>
+			<td><input type=text name=email value="{{userRegistrationForm.email}}">
+            <td>
 		<tr>
 			<td>Пароль (не от мыла)
-			<td><input type=password name=password value=''>
-		<tr>
+			<td><input type=password name=password value='{{userRegistrationForm.password}}'>
+            <td>{{fieldError.password}}
+        <tr>
 			<td>Пароль еще разок
-			<td><input type=password name=passwordConfirm value=''>
-		<tr>
-			<td>Два минус три плюс пять
-			<td><input type=text name=zombiCheck>
-		<tr>
+			<td><input type=password name=passwordConfirm value='{{userRegistrationForm.passwordConfirm}}'>
+            <td>{{fieldError.passwordConfirm}}
+        <tr>
 			<td>Как к Вам обращаться
-			<td><input type=text name=name>
+			<td><input type=text name=name value="{{userRegistrationForm.name}}">
+            <td>{{fieldError.name}}
 		<tr>
-			<td colspan=2><input type=submit name=register_submit value='  Готово  '>
+			<td colspan=3><input type=submit name=register_submit value='  Готово  '>
 		</table>
 	</form>
 </div>
