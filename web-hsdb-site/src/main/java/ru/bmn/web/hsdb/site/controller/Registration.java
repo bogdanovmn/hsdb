@@ -6,48 +6,40 @@ import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.bmn.web.hsdb.model.entity.app.User;
 import ru.bmn.web.hsdb.model.entity.app.UserRole;
 import ru.bmn.web.hsdb.model.repository.app.UserRepository;
 import ru.bmn.web.hsdb.site.controller.domain.UserRegistrationForm;
-import ru.bmn.web.hsdb.site.controller.validation.RegistrationValidation;
 import ru.bmn.web.hsdb.site.security.HsdbSecurityService;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 
 @Controller
 public class Registration {
 
 	@Autowired
-	UserRepository userRepository;
+	private	UserRepository userRepository;
 
 	@Autowired
 	private HsdbSecurityService securityService;
-
-	@Autowired
-	private RegistrationValidation registrationValidation;
 
 	@GetMapping("/registration")
 	public ModelAndView registration(Model model) {
 		model.addAttribute("userForm", new UserRegistrationForm());
 
-//		return new ModelAndView("registration.html");
 		return new ModelAndView("registration");
 	}
 
 	@PostMapping("/registration")
-	public String registration(
-		@ModelAttribute("userForm") UserRegistrationForm userForm,
-		BindingResult bindingResult,
-		Model model
+	public ModelAndView registration(
+		@Valid UserRegistrationForm userForm,
+		BindingResult bindingResult
 	) {
-		this.registrationValidation.validate(userForm, bindingResult);
-
 		if (bindingResult.hasErrors()) {
-			return "registration";
+			return new ModelAndView("registration");
 		}
 
 		User user = this.userRepository.save(
@@ -73,8 +65,11 @@ public class Registration {
 				)
 		);
 
-		securityService.autologin(user.getName(), user.getPasswordHash());
+		this.securityService.login(
+			user.getName(),
+			user.getPasswordHash()
+		);
 
-		return "redirect:/collection/in";
+		return new ModelAndView("redirect:/collection/in");
 	}
 }

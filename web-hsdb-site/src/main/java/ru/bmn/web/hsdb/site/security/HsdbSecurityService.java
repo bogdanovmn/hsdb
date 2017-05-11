@@ -31,11 +31,16 @@ public class HsdbSecurityService {
 		return null;
 	}
 
-	public void autologin(String username, String password) {
-		UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+	public void login(String username, String password) {
+		UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
+			= new UsernamePasswordAuthenticationToken(
+				userDetails,
+				password,
+				userDetails.getAuthorities()
+		);
 
-		authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+		this.authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
 		if (usernamePasswordAuthenticationToken.isAuthenticated()) {
 			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

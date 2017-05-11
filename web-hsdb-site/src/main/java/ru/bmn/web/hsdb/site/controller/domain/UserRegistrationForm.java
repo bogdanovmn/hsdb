@@ -1,11 +1,29 @@
 package ru.bmn.web.hsdb.site.controller.domain;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Size;
+
 public class UserRegistrationForm {
+	@NotNull
+	@Size(min=3, max=20)
 	private String name;
+
+	@NotNull
+	@Size(min=8, max=32)
 	private String password;
+
+	@NotNull
+	@Size(min=8, max=32)
 	private String passwordConfirm;
+
+	@Null
+	@Size(min=3, max=32)
 	private String hearthpwnName;
+
+	@NotNull
 	private String email;
+
 
 	public String getName() {
 		return name;

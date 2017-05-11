@@ -47,6 +47,5 @@ public class Collection {
 //				_prepare_filter_params(character_id => $character_id, rarity_id => $rarity_id, set_id => $set_id),
 //				*/
 //
-//		getServletContext().getRequestDispatcher("/collection.jsp").forward(req, resp);
 	}
 }
