@@ -3,6 +3,7 @@ package ru.bmn.web.hsdb.etl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.hs.*;
 import ru.bmn.web.hsdb.model.repository.hs.CardRepository;
 import ru.bmn.web.hsdb.model.repository.hs.SoundRepository;

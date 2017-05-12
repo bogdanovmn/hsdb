@@ -3,7 +3,9 @@ package ru.bmn.web.hsdb.site;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import ru.bmn.web.hsdb.model.entity.EntityFactory;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "ru.bmn.web.hsdb.model.repository")
@@ -12,5 +14,11 @@ public class App {
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(App.class, args);
 	}
+
+	@Bean
+	public EntityFactory getEntityFactory() {
+		return new EntityFactory();
+	}
+
 }
 

@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.app.User;
 import ru.bmn.web.hsdb.model.entity.app.UserRole;
 import ru.bmn.web.hsdb.model.repository.app.UserRepository;
@@ -30,6 +31,9 @@ public class Registration {
 
 	@Autowired
 	private HsdbSecurityService securityService;
+
+	@Autowired
+	private EntityFactory entityFactory;
 
 	@GetMapping("/registration")
 	public ModelAndView registration(Model model) {
@@ -85,7 +89,11 @@ public class Registration {
 				.setRegisterDate(new Date())
 				.setRoles(
 					new HashSet<UserRole>() {{
-						add((UserRole) new UserRole().setName("User"));
+						add(
+							(UserRole) entityFactory.getPersistEntity(
+								new UserRole().setName("User")
+							)
+						);
 					}}
 				)
 				.setName(

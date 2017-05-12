@@ -1,8 +1,10 @@
-package ru.bmn.web.hsdb.etl;
+package ru.bmn.web.hsdb.model.entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.bmn.web.hsdb.model.entity.app.UserRole;
 import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
 import ru.bmn.web.hsdb.model.entity.hs.*;
+import ru.bmn.web.hsdb.model.repository.app.UserRoleRepository;
 import ru.bmn.web.hsdb.model.repository.common.EntityWithUniqueNameRepository;
 import ru.bmn.web.hsdb.model.repository.hs.*;
 
@@ -26,6 +28,8 @@ public class EntityFactory {
 	private TypeRepository typeRepository;
 	@Autowired
 	private MechanicRepository mechanicRepository;
+	@Autowired
+	private UserRoleRepository userRoleRepository;
 
 
 	public EntityFactory() {}
@@ -70,6 +74,7 @@ public class EntityFactory {
 		if (entityClass.equals(Series.class))         result = this.seriesRepository;
 		if (entityClass.equals(Type.class))           result = this.typeRepository;
 		if (entityClass.equals(Mechanic.class))       result = this.mechanicRepository;
+		if (entityClass.equals(UserRole.class))       result = this.userRoleRepository;
 
 		return result;
 	}

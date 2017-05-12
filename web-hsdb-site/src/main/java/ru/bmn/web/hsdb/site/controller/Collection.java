@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.bmn.web.hsdb.model.repository.hs.CardRepository;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/collection")
 public class Collection {
@@ -16,11 +18,11 @@ public class Collection {
 
 	@GetMapping("/in")
 	public String collectionIn(
-		@RequestParam("rarity_id") int rarityId,
-		@RequestParam("series_id") int seriesId,
-		@RequestParam("character_id") int characterId
+		@RequestParam("rarity_id") Optional<Integer> rarityId,
+		@RequestParam("series_id") Optional<Integer> seriesId,
+		@RequestParam("character_id") Optional<Integer> characterId
 	) {
-		this.cardRepository.findAll();
+//		this.cardRepository.findAll();
 
 		return "index";
 //		BoosterCards boosterCards = (BoosterCards) this.getServletContext().getAttribute("boosterCards");
