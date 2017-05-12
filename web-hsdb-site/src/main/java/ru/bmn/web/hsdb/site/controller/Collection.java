@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import ru.bmn.web.hsdb.model.repository.hs.CardRepository;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -17,14 +20,16 @@ public class Collection {
 	CardRepository cardRepository;
 
 	@GetMapping("/in")
-	public String collectionIn(
+	public ModelAndView collectionIn(
 		@RequestParam("rarity_id") Optional<Integer> rarityId,
 		@RequestParam("series_id") Optional<Integer> seriesId,
 		@RequestParam("character_id") Optional<Integer> characterId
 	) {
 //		this.cardRepository.findAll();
 
-		return "index";
+		Map<String, Object> model = new HashMap<>();
+		model.put("userId", 1);
+		return new ModelAndView("index", model);
 //		BoosterCards boosterCards = (BoosterCards) this.getServletContext().getAttribute("boosterCards");
 //		UserCollection collection = new UserCollection(
 //			(Connection) this.getServletContext().getAttribute("dbConnection"),

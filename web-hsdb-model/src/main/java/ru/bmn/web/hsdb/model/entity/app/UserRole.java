@@ -3,8 +3,6 @@ package ru.bmn.web.hsdb.model.entity.app;
 import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.Set;
 

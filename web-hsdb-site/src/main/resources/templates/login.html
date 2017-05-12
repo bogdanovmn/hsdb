@@ -2,7 +2,12 @@
 
 <h1>Вход</h1>
 
-{{!inc/error_msg}}
+{{inc/error_msg}}
+
+{{#error}}
+<div class=error>{{error}}</div>
+{{/error}}
+
 <div class=login>
 	<form method=post>
 		<table>
