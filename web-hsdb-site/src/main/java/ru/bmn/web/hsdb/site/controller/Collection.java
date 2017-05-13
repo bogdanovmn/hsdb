@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.bmn.web.hsdb.model.entity.app.User;
+import ru.bmn.web.hsdb.model.entity.hs.CharacterClass;
 import ru.bmn.web.hsdb.model.repository.hs.CardRepository;
+import ru.bmn.web.hsdb.site.controller.domain.FilterValues;
 import ru.bmn.web.hsdb.site.controller.domain.HeadMenu;
 import ru.bmn.web.hsdb.site.security.HsdbSecurityService;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/collection")
@@ -25,9 +26,9 @@ public class Collection {
 
 	@GetMapping("/in")
 	public ModelAndView collectionIn(
-		@RequestParam("rarity_id") Optional<Integer> rarityId,
-		@RequestParam("series_id") Optional<Integer> seriesId,
-		@RequestParam("character_id") Optional<Integer> characterId
+		@RequestParam(value = "rarity_id", defaultValue = "0") Integer rarityId,
+		@RequestParam(value = "series_id", defaultValue = "0") Integer seriesId,
+		@RequestParam(value = "character_id", defaultValue = "0") Integer characterId
 	) {
 //		this.cardRepository.findAll();
 
@@ -38,14 +39,16 @@ public class Collection {
 			new HashMap<String, Object>() {{
 				put("userName", user.getName());
 				put("menu", new HeadMenu(HeadMenu.HMI_COLLECTION_IN).getItems());
-				put("collectionPercent", 666);
+				put("collectionPercent", 666); //Math.floor(100 * collection.total() / boosterCards.total()));
+				put("type", "in");
+				put("characterFilter", new FilterValues(CharacterClass.class, characterId).getItems());
+
 			}}
 		);
 //
 //		req.setAttribute("cards", cards.getInItems(characterFilter, rarityFilter, setFilter));
 //
-//		req.setAttribute("type", "in");
-//		req.setAttribute("collection_percent", Math.floor(100 * collection.total() / boosterCards.total()));
+//		req.setAttribute("collection_percent",
 //		req.setAttribute("filter_character", new QueryFilter(characterFilter));
 //		req.setAttribute("filter_set", cards);
 //		req.setAttribute("filter_rarity", cards);

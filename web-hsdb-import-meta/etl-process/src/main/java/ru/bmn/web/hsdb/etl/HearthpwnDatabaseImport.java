@@ -47,25 +47,25 @@ public class HearthpwnDatabaseImport {
 
 	private void updateCard(Card card) {
 		card.setArtist(
-			(Artist) this.entityFactory.getPersistEntity(card.getArtist())
+			(Artist) this.entityFactory.getPersistEntityWithUniqueName(card.getArtist())
 		);
 
 		card.setRace(
 			card.getRace() != null
-				? (Race) this.entityFactory.getPersistEntity(card.getRace())
+				? (Race) this.entityFactory.getPersistEntityWithUniqueName(card.getRace())
 				: null
 		);
 
 		card.setRarity(
-			(Rarity) this.entityFactory.getPersistEntity(card.getRarity())
+			(Rarity) this.entityFactory.getPersistEntityWithUniqueName(card.getRarity())
 		);
 
 		card.setSeries(
-			(Series) this.entityFactory.getPersistEntity(card.getSeries())
+			(Series) this.entityFactory.getPersistEntityWithUniqueName(card.getSeries())
 		);
 
 		card.setType(
-			(Type) this.entityFactory.getPersistEntity(card.getType())
+			(Type) this.entityFactory.getPersistEntityWithUniqueName(card.getType())
 		);
 
 		// Many to many
@@ -74,7 +74,7 @@ public class HearthpwnDatabaseImport {
 			Set<Mechanic> persistMechanics = new HashSet<>();
 			for (Mechanic mechanic : card.getMechanic()) {
 				persistMechanics.add(
-					(Mechanic) this.entityFactory.getPersistEntity(mechanic)
+					(Mechanic) this.entityFactory.getPersistEntityWithUniqueName(mechanic)
 				);
 			}
 			card.setMechanic(persistMechanics);
@@ -84,7 +84,7 @@ public class HearthpwnDatabaseImport {
 			Set<CharacterClass> persistChars = new HashSet<>();
 			for (CharacterClass character : card.getCharacters()) {
 				persistChars.add(
-					(CharacterClass) this.entityFactory.getPersistEntity(character)
+					(CharacterClass) this.entityFactory.getPersistEntityWithUniqueName(character)
 				);
 			}
 			card.setCharacters(persistChars);

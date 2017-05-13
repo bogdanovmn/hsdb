@@ -2,70 +2,70 @@
 	<div class=filter><b>Персонаж</b>
 		<div class=values>
 			<table>
-			<c:forEach var="i" items="${filter_character}">
+			{{#characterFilter}}
 				<tr>
 				<td class=progress>
-					<c:if test="${not empty i.progress}">
-						<span class="progress progress_${i.type}">${i.progress}%</span>
-					</c:if>
+					{{#progress}}
+						<span class="progress progress_{{type}}">{{.}}%</span>
+					{{/progress}}
 				<td>
-					<c:if test="${not empty i.selected}">
-						<b>${i.name}</b>
-					</c:if>
-					<c:if test="${empty i.selected}">
-						<a href="?character_id=${i.id}&${current_filter_wo_character_id}">
-							${i.name}
+					{{#selected}}
+						<b>{{name}}</b>
+					{{/selected}}
+					{{^selected}}
+						<a href="?character_id={{id}}&{{currentFilterWOCharacterId}">
+							{{name}}
 						</a>
-					</c:if>
-			</c:forEach>
+					{{/selected}}
+			{{/characterFilter}}
 			</table>
 		</div>
 	</div>
 	
 	<div class=filter>
 		<b>Редкость</b>
-		<c:if test="${not empty rarity_id}">
-			<a class=reset href="?rarity_id=0&${current_filter_wo_rarity_id}">сбросить</a>
-		</c:if>
+		{{#rarityId}}
+			<a class=reset href="?rarity_id=0&{{currentFilterWORarityId}}">сбросить</a>
+		{{/rarityId}}
 
 		<div class=values>
-			<c:forEach var="i" items="${filter_rarity}">
-				<c:if test="${not empty i.selected}">
-					<div class="rarity_filter rarity_filter_${i.id}_selected"></div>
-				</c:if>
-				<c:if test="${empty i.selected}">
-					<a class=rarity_filter href="?rarity_id=${i.id}&${current_filter_wo_rarity_id}">
-						<div class="rarity_filter rarity_filter_${i.id} selected"></div>
+			{{#filterRarity}}
+				{{#selected}}
+					<div class="rarity_filter rarity_filter_{{id}}_selected"></div>
+				{{/selected}}
+				{{^selected}}
+					<a class=rarity_filter href="?rarity_id={{id}}&{{currentFilterWORarity_id}}">
+						<div class="rarity_filter rarity_filter_{{id}} selected"></div>
 					</a>
-				</c:if>
-			</c:forEach>
+				{{/selected}}
+			{{/filterRarity}}
 		</div>
 	</div>
 
 	<div class=filter>
 		<b>Набор</b>
-		<c:if test="${not empty set_id}">
-			<a class=reset href="?set_id=0&${current_filter_wo_set_id}">сбросить</a>
-		</c:if>
+		{{#setId}}
+			<a class=reset href="?set_id=0&{{currentFilterWOSetId}}">сбросить</a>
+		{{/setId}}
 
 		<div class=values>
 			<table>
-			<c:forEach var="i" items="${filter_set}">
+			{{#filterSet}}
 				<tr>
 				<td class=progress>
-					<c:if test="${not empty i.progress}">
-						<span class="progress progress_${i.type}">${i.progress}%</span>
-					</c:if>
+					{{#progress}}
+						<span class="progress progress_{{type}}">{{.}}%</span>
+					{{/progress}}
 				<td>
-					<c:if test="${not empty i.selected}">
-						<b>${i.name}</b>
-					</c:if>
-					<c:if test="${not empty i.selected}">
-						<a href="?set_id=${i.id}&${current_filter_wo_set_id}">
-							${i.name}
+					{{#selected}}
+						<b>{{name}</b>
+					{{/selected}}
+					{{^selected}}">
+						<a href="?set_id={{id}}&{{currentFilterWOSetId}}">
+							{{name}
 						</a>
-					</c:if>
-			</c:forEach>
+					{{/selected}}
+			{{/filterSet}}
 			</table>
 		</div>
 	</div>

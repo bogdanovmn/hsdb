@@ -90,7 +90,7 @@ public class Registration {
 				.setRoles(
 					new HashSet<UserRole>() {{
 						add(
-							(UserRole) entityFactory.getPersistEntity(
+							(UserRole) entityFactory.getPersistEntityWithUniqueName(
 								new UserRole().setName("User")
 							)
 						);

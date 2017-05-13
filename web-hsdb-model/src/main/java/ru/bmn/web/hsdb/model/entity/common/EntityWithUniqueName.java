@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.util.List;
 
 @MappedSuperclass
 public abstract class EntityWithUniqueName {

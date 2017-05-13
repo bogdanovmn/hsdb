@@ -1,13 +1,13 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
-import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueNameTranslatable;
+import ru.bmn.web.hsdb.model.entity.common.DictionaryEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
-public class CharacterClass extends EntityWithUniqueNameTranslatable {
+public class CharacterClass extends DictionaryEntity {
 	@ManyToMany(mappedBy = "characters")
 	private Set<Card> cards;
 
