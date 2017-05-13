@@ -1,7 +1,5 @@
 package ru.bmn.web.hsdb.site.controller.domain;
 
-import java.util.Objects;
-
 public class HeadMenuItem {
 	private final String id;
 	private final String url;

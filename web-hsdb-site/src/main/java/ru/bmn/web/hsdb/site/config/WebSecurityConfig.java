@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.bmn.web.hsdb.site.security.HsdbUserDetailsService;
 import ru.bmn.web.hsdb.site.security.Md5PasswordEncoder;
 
@@ -24,7 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/registration").permitAll()
+				.antMatchers("/registration").anonymous()
+				.antMatchers("/css/**").permitAll()
 				.anyRequest().authenticated()
 
 		.and().formLogin()
@@ -33,6 +35,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll()
 
 		.and().logout()
+			.logoutRequestMatcher(
+				new AntPathRequestMatcher("/logout")
+			)
+			.logoutSuccessUrl("/login")
 			.permitAll()
 
 		.and().csrf()

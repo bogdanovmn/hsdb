@@ -23,6 +23,11 @@ public class HsdbSecurityService {
 	private UserDetailsService userDetailsService;
 
 
+	public boolean isLogged() {
+//		return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+		return this.getLoggedInUser() != null;
+	}
+
 	public User getLoggedInUser() {
 		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (userDetails instanceof HsdbUserDetails) {

@@ -11,6 +11,8 @@ import ru.bmn.web.hsdb.model.entity.EntityFactory;
 @EnableJpaRepositories(basePackages = "ru.bmn.web.hsdb.model.repository")
 @EntityScan(basePackages = "ru.bmn.web.hsdb.model.entity")
 public class App {
+	public final static String HOME_PAGE = "/collection/in";
+
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(App.class, args);
 	}

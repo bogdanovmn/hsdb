@@ -1,7 +1,7 @@
-a,body,table,tr,td,li,p,input,textarea,pre{font-family:verdana,arial;color:#101610;padding:0;margin:0}
+a,body,table,tr,td,li,p,input,textarea,pre {font-family:verdana,arial;color:#101610;padding:0;margin:0}
 table{width:auto;table-layout:fixed;border-collapse:collapse;text-align:left}
 
-div.main { width: 1000px; margin: 0 auto; }
+div.main { width: 1000px; margin: 0 auto; text-align: center; }
 
 #top_menu { position: static; font-size: 100%; }
 	#links     { float: left;  width: 70%; background: #ddd; padding: 5px; }
