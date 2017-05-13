@@ -1,4 +1,6 @@
-package ru.bmn.web.hsdb.servlet.view.ui;
+package ru.bmn.web.hsdb.site.controller.domain;
+
+import java.util.Objects;
 
 public class HeadMenuItem {
 	private final String id;
@@ -17,7 +19,7 @@ public class HeadMenuItem {
 	}
 
 	public boolean is(String current) {
-		return this.id == current;
+		return this.id.equals(current);
 	}
 
 	public String getUrl() {

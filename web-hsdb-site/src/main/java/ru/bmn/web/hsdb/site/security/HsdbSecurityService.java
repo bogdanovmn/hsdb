@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import ru.bmn.web.hsdb.model.entity.app.User;
 
 @Service
 public class HsdbSecurityService {
@@ -22,10 +23,10 @@ public class HsdbSecurityService {
 	private UserDetailsService userDetailsService;
 
 
-	public String findLoggedInUsername() {
-		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-		if (userDetails instanceof UserDetails) {
-			return ((UserDetails)userDetails).getUsername();
+	public User getLoggedInUser() {
+		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (userDetails instanceof HsdbUserDetails) {
+			return ((HsdbUserDetails)userDetails).getUser();
 		}
 
 		return null;
