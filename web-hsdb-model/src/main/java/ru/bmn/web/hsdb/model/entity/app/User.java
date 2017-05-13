@@ -1,51 +1,34 @@
 package ru.bmn.web.hsdb.model.entity.app;
 
+import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(
-	uniqueConstraints = {
-		@UniqueConstraint(
-			columnNames = {"name"}
-		)
-	}
-)
-public class User {
-	@Id
-	@GeneratedValue
-	private Integer id;
-
-	@Column(nullable = false)
-	private String name;
+public class User extends EntityWithUniqueName {
 	@Column(nullable = false)
 	private String email;
+
 	@Column(nullable = false)
 	private String passwordHash;
+
+	private String hearthpwnUserName;
+
 	@Column(nullable = false)
 	private Date registerDate;
 
 	@OneToMany(mappedBy = "user")
 	private Set<CollectionItem> collection;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public User setId(Integer id) {
-		this.id = id;
-		return this;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public User setName(String name) {
-		this.name = name;
-		return this;
-	}
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinTable(
+		name = "role2user",
+		joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+	)
+	private Set<UserRole> roles;
 
 	public String getEmail() {
 		return email;
@@ -80,6 +63,24 @@ public class User {
 
 	public User setCollection(Set<CollectionItem> collection) {
 		this.collection = collection;
+		return this;
+	}
+
+	public String getHearthpwnUserName() {
+		return hearthpwnUserName;
+	}
+
+	public User setHearthpwnUserName(String hearthpwnUserName) {
+		this.hearthpwnUserName = hearthpwnUserName;
+		return this;
+	}
+
+	public Set<UserRole> getRoles() {
+		return roles;
+	}
+
+	public User setRoles(Set<UserRole> roles) {
+		this.roles = roles;
 		return this;
 	}
 }

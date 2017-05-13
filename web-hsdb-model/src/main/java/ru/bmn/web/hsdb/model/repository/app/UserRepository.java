@@ -1,7 +1,10 @@
 package ru.bmn.web.hsdb.model.repository.app;
 
-import org.springframework.data.repository.CrudRepository;
 import ru.bmn.web.hsdb.model.entity.app.User;
+import ru.bmn.web.hsdb.model.repository.common.EntityWithUniqueNameRepository;
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+import java.util.Set;
+
+public interface UserRepository extends EntityWithUniqueNameRepository<User> {
+	Set<User> findAllByHearthpwnUserNameIsNull();
 }

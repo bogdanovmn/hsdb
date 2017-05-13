@@ -5,32 +5,42 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import ru.bmn.web.hsdb.model.entity.app.User;
 import ru.bmn.web.hsdb.model.repository.hs.CardRepository;
+import ru.bmn.web.hsdb.site.controller.domain.HeadMenu;
+import ru.bmn.web.hsdb.site.security.HsdbSecurityService;
+
+import java.util.HashMap;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/collection")
 public class Collection {
 
 	@Autowired
-	CardRepository cardRepository;
+	private CardRepository cardRepository;
+	@Autowired
+	private HsdbSecurityService securityService;
 
 	@GetMapping("/in")
-	public String collectionIn(
-		@RequestParam("rarity_id") int rarityId,
-		@RequestParam("series_id") int seriesId,
-		@RequestParam("character_id") int characterId
+	public ModelAndView collectionIn(
+		@RequestParam("rarity_id") Optional<Integer> rarityId,
+		@RequestParam("series_id") Optional<Integer> seriesId,
+		@RequestParam("character_id") Optional<Integer> characterId
 	) {
-		this.cardRepository.findAll();
+//		this.cardRepository.findAll();
 
-		return "index";
-//		BoosterCards boosterCards = (BoosterCards) this.getServletContext().getAttribute("boosterCards");
-//		UserCollection collection = new UserCollection(
-//			(Connection) this.getServletContext().getAttribute("dbConnection"),
-//			(Integer)    req.getSession().getAttribute("userId")
-//		);
-//
-//		ViewCollectionCards cards = new ViewCollectionCards(collection, boosterCards);
-//
+		User user = this.securityService.getLoggedInUser();
+
+		return new ModelAndView(
+			"index",
+			new HashMap<String, Object>() {{
+				put("userName", user.getName());
+				put("menu", new HeadMenu(HeadMenu.HMI_COLLECTION_IN).getItems());
+				put("collectionPercent", 666);
+			}}
+		);
 //
 //		req.setAttribute("cards", cards.getInItems(characterFilter, rarityFilter, setFilter));
 //
@@ -47,6 +57,5 @@ public class Collection {
 //				_prepare_filter_params(character_id => $character_id, rarity_id => $rarity_id, set_id => $set_id),
 //				*/
 //
-//		getServletContext().getRequestDispatcher("/collection.jsp").forward(req, resp);
 	}
 }
