@@ -9,4 +9,21 @@ public class FilterValuesItem {
 		this.id = id;
 		this.name = name;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public FilterValuesItem setSelected(boolean selected) {
+		this.selected = selected;
+		return this;
+	}
 }
