@@ -18,9 +18,6 @@ import java.util.Set;
 public class HearthpwnCollectionImport {
 	private static final Logger LOG = LogManager.getLogger(HearthpwnCollectionImport.class);
 
-
-	@Autowired
-	private EntityFactory entityFactory;
 	@Autowired
 	private CardRepository cardRepository;
 	@Autowired

@@ -3,16 +3,11 @@ package ru.bmn.web.hsdb.site.controller.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.common.DictionaryEntity;
-import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
-import ru.bmn.web.hsdb.model.entity.hs.CharacterClass;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 public class FilterValues {
 	private final Class<? extends DictionaryEntity> dictEntClass;
@@ -38,7 +33,7 @@ public class FilterValues {
 
 		return dictEntities.stream()
 			.sorted(
-				Comparator.comparingInt(DictionaryEntity::getOrder)
+				Comparator.comparingInt(DictionaryEntity::getSortValue)
 			)
 			.map(
 				x -> {

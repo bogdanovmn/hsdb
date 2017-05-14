@@ -5,7 +5,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class DictionaryEntity extends EntityWithUniqueName {
 	private String nameRu = "";
-	private Integer order = 0;
+	private Integer sortValue = 0;
 
 	public String getNameRu() {
 		return nameRu;
@@ -16,18 +16,18 @@ public abstract class DictionaryEntity extends EntityWithUniqueName {
 		return this;
 	}
 
-	public Integer getOrder() {
-		return order;
+	public Integer getSortValue() {
+		return sortValue;
 	}
 
-	public DictionaryEntity setOrder(Integer order) {
-		this.order = order;
+	public DictionaryEntity setSortValue(Integer sortValue) {
+		this.sortValue = sortValue;
 		return this;
 	}
 
 	public DictionaryEntity setId(Integer id) {
 		super.setId(id);
-		this.setOrder(id);
+		this.setSortValue(id);
 		return this;
 	}
 }

@@ -1,5 +1,8 @@
 package ru.bmn.web.hsdb.model.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
 import ru.bmn.web.hsdb.model.repository.common.EntityWithUniqueNameRepository;
 
@@ -8,10 +11,11 @@ import java.util.Map;
 
 public class EntityFactory {
 	private final Map<Class<?>, Map<String, EntityWithUniqueName>> cache = new HashMap<>();
-	private final static EntityMapFactory ENTITY_MAP = new EntityMapFactory();
+
+	@Autowired
+	private EntityMapFactory entityMapFactory;
 
 	public EntityFactory() {
-
 	}
 
 	public EntityWithUniqueName getPersistEntityWithUniqueName(EntityWithUniqueName entity) {
@@ -25,7 +29,7 @@ public class EntityFactory {
 		}
 
 		if (!this.cache.get(entityClass).containsKey(name)) {
-			EntityWithUniqueNameRepository repository = ENTITY_MAP.getRepository(entityClass);
+			EntityWithUniqueNameRepository repository = entityMapFactory.getRepository(entityClass);
 			result = repository.findFirstByName(name);
 
 			if (result != null) {
@@ -44,6 +48,6 @@ public class EntityFactory {
 	}
 
 	public Iterable getAll(Class<? extends EntityWithUniqueName> entClass) {
-		return ENTITY_MAP.getRepository(entClass).findAll();
+		return entityMapFactory.getRepository(entClass).findAll();
 	}
 }
