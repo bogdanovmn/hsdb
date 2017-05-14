@@ -1,8 +1,6 @@
 package ru.bmn.web.hsdb.model.entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
 import ru.bmn.web.hsdb.model.repository.common.EntityWithUniqueNameRepository;
 

@@ -1,7 +1,5 @@
 package ru.bmn.web.hsdb.site.controller.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.common.DictionaryEntity;
 
 import java.util.ArrayList;
@@ -10,24 +8,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FilterValues {
-	private final Class<? extends DictionaryEntity> dictEntClass;
+	private final Iterable entities;
 	private final Integer selectedId;
 
-	@Autowired
-	EntityFactory entityFactory;
-
-	public FilterValues(Class<? extends DictionaryEntity> dictEntityClass, Integer selectedId) {
-		this.dictEntClass = dictEntityClass;
+	public FilterValues(Iterable rawEntities, Integer selectedId) {
+		this.entities = rawEntities;
 		this.selectedId = selectedId;
 	}
 
 	public List<FilterValuesItem> getItems() {
-
-		Iterable entities = this.entityFactory.getAll(this.dictEntClass);
-
 		List<DictionaryEntity> dictEntities = new ArrayList<>();
 
-		for (Object obj : entities) {
+		for (Object obj : this.entities) {
 			dictEntities.add((DictionaryEntity) obj);
 		}
 

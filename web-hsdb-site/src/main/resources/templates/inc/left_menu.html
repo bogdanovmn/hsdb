@@ -1,3 +1,4 @@
+{{#filter}}
 <div id=left_menu>
 	<div class=filter><b>Персонаж</b>
 		<div class=values>
@@ -13,7 +14,7 @@
 						<b>{{name}}</b>
 					{{/selected}}
 					{{^selected}}
-						<a href="?character_id={{id}}&{{currentFilterWOCharacterId}">
+						<a href="?character_id={{id}}&{{currentFilterWOCharacterId}}">
 							{{name}}
 						</a>
 					{{/selected}}
@@ -29,28 +30,28 @@
 		{{/rarityId}}
 
 		<div class=values>
-			{{#filterRarity}}
+			{{#rarityFilter}}
 				{{#selected}}
 					<div class="rarity_filter rarity_filter_{{id}}_selected"></div>
 				{{/selected}}
 				{{^selected}}
-					<a class=rarity_filter href="?rarity_id={{id}}&{{currentFilterWORarity_id}}">
+					<a class=rarity_filter href="?rarity_id={{id}}&{{currentFilterWORarityId}}">
 						<div class="rarity_filter rarity_filter_{{id}} selected"></div>
 					</a>
 				{{/selected}}
-			{{/filterRarity}}
+			{{/rarityFilter}}
 		</div>
 	</div>
 
 	<div class=filter>
 		<b>Набор</b>
-		{{#setId}}
-			<a class=reset href="?set_id=0&{{currentFilterWOSetId}}">сбросить</a>
-		{{/setId}}
+		{{#seriesId}}
+			<a class=reset href="?series_id=0&{{currentFilterWOSeriesId}}">сбросить</a>
+		{{/seriesId}}
 
 		<div class=values>
 			<table>
-			{{#filterSet}}
+			{{#seriesFilter}}
 				<tr>
 				<td class=progress>
 					{{#progress}}
@@ -58,15 +59,16 @@
 					{{/progress}}
 				<td>
 					{{#selected}}
-						<b>{{name}</b>
+						<b>{{name}}</b>
 					{{/selected}}
-					{{^selected}}">
-						<a href="?set_id={{id}}&{{currentFilterWOSetId}}">
-							{{name}
+					{{^selected}}
+						<a href="?series_id={{id}}&{{currentFilterWOSeriesId}}">
+							{{name}}
 						</a>
 					{{/selected}}
-			{{/filterSet}}
+			{{/seriesFilter}}
 			</table>
 		</div>
 	</div>
 </div>
+{{/filter}}

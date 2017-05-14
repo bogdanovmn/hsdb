@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.app.User;
-import ru.bmn.web.hsdb.model.entity.hs.CharacterClass;
 import ru.bmn.web.hsdb.model.repository.hs.CardRepository;
-import ru.bmn.web.hsdb.site.controller.domain.FilterValues;
+import ru.bmn.web.hsdb.site.controller.domain.CollectionFilter;
+import ru.bmn.web.hsdb.site.controller.domain.FilterMenu;
 import ru.bmn.web.hsdb.site.controller.domain.HeadMenu;
 import ru.bmn.web.hsdb.site.security.HsdbSecurityService;
 
@@ -18,7 +19,8 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("/collection")
 public class Collection {
-
+	@Autowired
+	private EntityFactory entityFactory;
 	@Autowired
 	private CardRepository cardRepository;
 	@Autowired
@@ -34,6 +36,8 @@ public class Collection {
 
 		User user = this.securityService.getLoggedInUser();
 
+		CollectionFilter collectionFilter = new CollectionFilter(characterId, rarityId, seriesId);
+
 		return new ModelAndView(
 			"index",
 			new HashMap<String, Object>() {{
@@ -41,24 +45,9 @@ public class Collection {
 				put("menu", new HeadMenu(HeadMenu.HMI_COLLECTION_IN).getItems());
 				put("collectionPercent", 666); //Math.floor(100 * collection.total() / boosterCards.total()));
 				put("type", "in");
-				put("characterFilter", new FilterValues(CharacterClass.class, characterId).getItems());
+				put("filter", new FilterMenu(entityFactory).getItems(collectionFilter));
 
 			}}
 		);
-//
-//		req.setAttribute("cards", cards.getInItems(characterFilter, rarityFilter, setFilter));
-//
-//		req.setAttribute("collection_percent",
-//		req.setAttribute("filter_character", new QueryFilter(characterFilter));
-//		req.setAttribute("filter_set", cards);
-//		req.setAttribute("filter_rarity", cards);
-//		req.setAttribute("menu", new HeadMenu("collection_in").getItems());
-//		req.setAttribute("filter_params", cards);
-//				/*filter_character   => $filter_character,
-//				filter_set         => $filter_set,
-//				filter_rarity      => $self->_prepare_filter('rarity', $rarity_id),
-//				_prepare_filter_params(character_id => $character_id, rarity_id => $rarity_id, set_id => $set_id),
-//				*/
-//
 	}
 }
