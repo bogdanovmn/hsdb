@@ -12,9 +12,9 @@ public class CollectionFilter {
 	private final Map<String, Integer> params = new HashMap<>();
 
 	public CollectionFilter(Integer characterId, Integer rarityId, Integer seriesId) {
-		this.params.put(CHARACTER_ID, characterId);
-		this.params.put(RARITY_ID, rarityId);
-		this.params.put(SERIES_ID, seriesId);
+		if (characterId != null) this.params.put(CHARACTER_ID, characterId);
+		if (rarityId != null) this.params.put(RARITY_ID, rarityId);
+		if (seriesId != null) this.params.put(SERIES_ID, seriesId);
 	}
 
 	public Integer getSeriesId() {
@@ -32,7 +32,7 @@ public class CollectionFilter {
 	public String getParamsWOSpecified(String excludeParam) {
 		return this.params.entrySet().stream()
 			.filter(
-				x -> x.getKey().equals(excludeParam)
+				x -> !x.getKey().equals(excludeParam)
 			)
 			.map(
 				x -> x.getValue() > 0

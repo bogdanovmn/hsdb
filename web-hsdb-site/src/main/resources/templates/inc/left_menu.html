@@ -14,7 +14,7 @@
 						<b>{{name}}</b>
 					{{/selected}}
 					{{^selected}}
-						<a href="?character_id={{id}}&{{currentFilterWOCharacterId}}">
+						<a href="?characterId={{id}}&{{currentFilterWOCharacterId}}">
 							{{name}}
 						</a>
 					{{/selected}}
@@ -26,7 +26,7 @@
 	<div class=filter>
 		<b>Редкость</b>
 		{{#rarityId}}
-			<a class=reset href="?rarity_id=0&{{currentFilterWORarityId}}">сбросить</a>
+			<a class=reset href="?{{currentFilterWORarityId}}">сбросить</a>
 		{{/rarityId}}
 
 		<div class=values>
@@ -35,7 +35,7 @@
 					<div class="rarity_filter rarity_filter_{{id}}_selected"></div>
 				{{/selected}}
 				{{^selected}}
-					<a class=rarity_filter href="?rarity_id={{id}}&{{currentFilterWORarityId}}">
+					<a class=rarity_filter href="?rarityId={{id}}&{{currentFilterWORarityId}}">
 						<div class="rarity_filter rarity_filter_{{id}} selected"></div>
 					</a>
 				{{/selected}}
@@ -46,7 +46,7 @@
 	<div class=filter>
 		<b>Набор</b>
 		{{#seriesId}}
-			<a class=reset href="?series_id=0&{{currentFilterWOSeriesId}}">сбросить</a>
+			<a class=reset href="?{{currentFilterWOSeriesId}}">сбросить</a>
 		{{/seriesId}}
 
 		<div class=values>
@@ -62,7 +62,7 @@
 						<b>{{name}}</b>
 					{{/selected}}
 					{{^selected}}
-						<a href="?series_id={{id}}&{{currentFilterWOSeriesId}}">
+						<a href="?seriesId={{id}}&{{currentFilterWOSeriesId}}">
 							{{name}}
 						</a>
 					{{/selected}}

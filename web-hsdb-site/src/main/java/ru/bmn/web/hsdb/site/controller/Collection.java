@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.app.User;
@@ -28,9 +27,9 @@ public class Collection {
 
 	@GetMapping("/in")
 	public ModelAndView collectionIn(
-		@RequestParam(value = "rarity_id", defaultValue = "0") Integer rarityId,
-		@RequestParam(value = "series_id", defaultValue = "0") Integer seriesId,
-		@RequestParam(value = "character_id", defaultValue = "0") Integer characterId
+		Integer rarityId,
+		Integer seriesId,
+		Integer characterId
 	) {
 //		this.cardRepository.findAll();
 
