@@ -6,10 +6,11 @@ import ru.bmn.web.hsdb.model.repository.common.EntityWithUniqueNameRepository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class EntityFactory {
-	private final Map<Class<?>, Map<String, EntityWithUniqueName>> cache = new HashMap<>();
-
+	private final Map<Class<?>, Map<String, EntityWithUniqueName>> singleEntityCache = new ConcurrentHashMap<>();
+	private final Map<Class<?>, Iterable> setEntityCache = new ConcurrentHashMap<>();
 	@Autowired
 	private EntityMapFactory entityMapFactory;
 
@@ -22,16 +23,16 @@ public class EntityFactory {
 		Class<? extends EntityWithUniqueName> entityClass = entity.getClass();
 		String name = entity.getName();
 
-		if (!this.cache.containsKey(entityClass)) {
-			this.cache.put(entityClass, new HashMap<>());
+		if (!this.singleEntityCache.containsKey(entityClass)) {
+			this.singleEntityCache.put(entityClass, new HashMap<>());
 		}
 
-		if (!this.cache.get(entityClass).containsKey(name)) {
+		if (!this.singleEntityCache.get(entityClass).containsKey(name)) {
 			EntityWithUniqueNameRepository repository = entityMapFactory.getRepository(entityClass);
 			result = repository.findFirstByName(name);
 
 			if (result != null) {
-				this.cache.get(entityClass).put(name, result);
+				this.singleEntityCache.get(entityClass).put(name, result);
 			}
 			else {
 				repository.save(entity);
@@ -39,13 +40,16 @@ public class EntityFactory {
 			}
 		}
 		else {
-			result = this.cache.get(entityClass).get(name);
+			result = this.singleEntityCache.get(entityClass).get(name);
 		}
 
 		return result;
 	}
 
 	public Iterable getAll(Class<? extends EntityWithUniqueName> entClass) {
-		return entityMapFactory.getRepository(entClass).findAll();
+		return this.setEntityCache.computeIfAbsent(
+			entClass,
+			x -> entityMapFactory.getRepository(entClass).findAll()
+		);
 	}
 }
