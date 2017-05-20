@@ -30,6 +30,8 @@ public class EntityMapFactory {
 	private MechanicRepository mechanicRepository;
 	@Autowired
 	private UserRoleRepository userRoleRepository;
+	@Autowired
+	private CardRepository cardRepository;
 
 	public EntityMapFactory() {
 	}
@@ -45,6 +47,7 @@ public class EntityMapFactory {
 			put(Type.class           , typeRepository);
 			put(Mechanic.class       , mechanicRepository);
 			put(UserRole.class       , userRoleRepository);
+			put(Card.class           , cardRepository);
 		}};
 	}
 

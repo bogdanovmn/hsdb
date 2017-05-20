@@ -2,10 +2,10 @@
 
 {{#cards}}
 		<div id="{{id}}" class=card>
-			<img src="{{image_url}}">
+			<img src="{{card.imageUrl}}">
 			<br>
-			<div id='norm_{{id}}' class="counter norm_count">{{norm_count}}</div>
-			<div id='gold_{{id}}' class="counter gold_count">{{gold_count}}</div>
+			<div id='norm_{{card.id}}' class="counter norm_count">{{normalCount}}</div>
+			<div id='gold_{{card.id}}' class="counter gold_count">{{goldCount}}</div>
 		</div>
 {{/cards}}
 
