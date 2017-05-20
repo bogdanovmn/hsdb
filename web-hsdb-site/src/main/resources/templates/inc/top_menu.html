@@ -5,9 +5,9 @@
 			{{#isSelected}}
 				<b>{{title}}</b>
 			{{/isSelected}}
-			{{^selected}}
+			{{^isSelected}}
 				<a href='{{url}}?{{currentFilter}}'>{{title}}</a>
-			{{/selected}}
+			{{/isSelected}}
 
 			{{#-first}}
 				<span class=progress>{{collectionPercent}}%</span>

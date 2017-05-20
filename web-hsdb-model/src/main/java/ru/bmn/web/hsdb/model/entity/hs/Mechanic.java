@@ -1,13 +1,13 @@
 package ru.bmn.web.hsdb.model.entity.hs;
 
-import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueNameTranslatable;
+import ru.bmn.web.hsdb.model.entity.common.DictionaryEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
-public class Mechanic extends EntityWithUniqueNameTranslatable {
+public class Mechanic extends DictionaryEntity {
 	private String description;
 
 	@ManyToMany(mappedBy = "mechanic")

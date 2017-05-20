@@ -3,7 +3,6 @@ package ru.bmn.web.hsdb.etl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.app.CollectionItem;
 import ru.bmn.web.hsdb.model.entity.app.User;
 import ru.bmn.web.hsdb.model.entity.hs.Card;
@@ -18,9 +17,6 @@ import java.util.Set;
 public class HearthpwnCollectionImport {
 	private static final Logger LOG = LogManager.getLogger(HearthpwnCollectionImport.class);
 
-
-	@Autowired
-	private EntityFactory entityFactory;
 	@Autowired
 	private CardRepository cardRepository;
 	@Autowired

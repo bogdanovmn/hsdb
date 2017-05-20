@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import ru.bmn.web.hsdb.model.entity.EntityFactory;
+import ru.bmn.web.hsdb.model.entity.EntityMapFactory;
 
 import java.io.IOException;
 
@@ -29,6 +30,11 @@ public class Import {
 	@Bean
 	public EntityFactory getEntityFactory() {
 		return new EntityFactory();
+	}
+
+	@Bean(initMethod = "init")
+	public EntityMapFactory getEntityMapFactory() {
+		return new EntityMapFactory();
 	}
 
 }
