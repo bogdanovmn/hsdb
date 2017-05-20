@@ -64,7 +64,14 @@ import java.util.stream.Collectors;
 			.select("table[class^=listing listing-cards-tabular] tr[class~=^(even|odd)$]");
 
 		for (Element row : rows) {
+			// Skip "Hero" and "Hero power" card types
+			String type = row.select("td[class=col-type").first().text();
+			if (type.contains("Hero")) {
+				continue;
+			}
+
 			Element nameElement = row.select("td[class=col-name").first();
+
 			URL cardPageUrl = new URL(
 				Site.PREFIX + nameElement.select("a[href^=/card]").first().attr("href")
 			);
@@ -77,9 +84,7 @@ import java.util.stream.Collectors;
 				nameElement.text()
 			);
 			card.setType(
-				(Type) new Type().setName(
-					row.select("td[class=col-type").first().text()
-				)
+				(Type) new Type().setName(type)
 			)
 			.setManaCost(
 				Integer.valueOf(
