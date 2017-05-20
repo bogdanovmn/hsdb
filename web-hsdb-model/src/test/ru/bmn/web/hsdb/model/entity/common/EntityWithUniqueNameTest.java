@@ -3,7 +3,7 @@ package ru.bmn.web.hsdb.model.entity.common;
 import org.junit.Test;
 import ru.bmn.web.hsdb.model.entity.hs.Artist;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class EntityWithUniqueNameTest {
 	@Test

@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb.site.controller.domain;
+package ru.bmn.web.hsdb.site.controller.domain.common;
 
 public class FilterValuesItem {
 	private final int id;

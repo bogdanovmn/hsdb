@@ -1,14 +1,12 @@
 package ru.bmn.web.hsdb.model.entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.bmn.web.hsdb.model.entity.app.CollectionItem;
 import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
 import ru.bmn.web.hsdb.model.entity.hs.Card;
 import ru.bmn.web.hsdb.model.repository.common.EntityWithUniqueNameRepository;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class EntityFactory {

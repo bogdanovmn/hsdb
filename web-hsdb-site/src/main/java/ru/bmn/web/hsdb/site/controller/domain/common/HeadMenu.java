@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb.site.controller.domain;
+package ru.bmn.web.hsdb.site.controller.domain.common;
 
 import java.util.ArrayList;
 import java.util.List;

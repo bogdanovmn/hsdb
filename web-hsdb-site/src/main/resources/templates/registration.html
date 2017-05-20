@@ -2,7 +2,7 @@
 
 <h1>Регистрация</h1>
 
-{{error}}
+{{customError}}
 
 <div class=register>
 	<form method=post>
@@ -14,15 +14,15 @@
 		<tr>
 			<td>Пароль (не от мыла)
 			<td><input type=password name=password value='{{userRegistrationForm.password}}'>
-            <td>{{fieldError.password}}
+            <td>{{formError.password}}
         <tr>
 			<td>Пароль еще разок
 			<td><input type=password name=passwordConfirm value='{{userRegistrationForm.passwordConfirm}}'>
-            <td>{{fieldError.passwordConfirm}}
+            <td>{{formError.passwordConfirm}}
         <tr>
 			<td>Как к Вам обращаться
 			<td><input type=text name=name value="{{userRegistrationForm.name}}">
-            <td>{{fieldError.name}}
+            <td>{{formError.name}}
 		<tr>
 			<td colspan=3><input type=submit name=register_submit value='  Готово  '>
 			&nbsp;&nbsp;&nbsp;&nbsp;<a href="/login">Войти</a>

@@ -1,11 +1,13 @@
-package ru.bmn.web.hsdb.site.controller.domain;
+package ru.bmn.web.hsdb.site.controller.domain.collection;
 
 import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.app.CollectionItem;
 import ru.bmn.web.hsdb.model.entity.app.User;
 import ru.bmn.web.hsdb.model.entity.hs.Card;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class UserCollectionFiltered {

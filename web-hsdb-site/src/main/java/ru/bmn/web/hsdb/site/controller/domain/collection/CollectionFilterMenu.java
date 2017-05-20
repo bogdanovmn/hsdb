@@ -1,17 +1,18 @@
-package ru.bmn.web.hsdb.site.controller.domain;
+package ru.bmn.web.hsdb.site.controller.domain.collection;
 
 import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.hs.CharacterClass;
 import ru.bmn.web.hsdb.model.entity.hs.Rarity;
 import ru.bmn.web.hsdb.model.entity.hs.Series;
+import ru.bmn.web.hsdb.site.controller.domain.common.FilterValues;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FilterMenu {
+public class CollectionFilterMenu {
 	private final EntityFactory entityFactory;
 
-	public FilterMenu(EntityFactory entityFactory) {
+	public CollectionFilterMenu(EntityFactory entityFactory) {
 		this.entityFactory = entityFactory;
 	}
 

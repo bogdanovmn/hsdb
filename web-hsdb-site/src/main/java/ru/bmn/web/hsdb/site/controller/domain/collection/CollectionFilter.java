@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb.site.controller.domain;
+package ru.bmn.web.hsdb.site.controller.domain.collection;
 
 import java.util.HashMap;
 import java.util.Map;

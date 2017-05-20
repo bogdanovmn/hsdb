@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb.site.controller.domain;
+package ru.bmn.web.hsdb.site.controller.domain.form;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;

@@ -1,4 +1,4 @@
-package ru.bmn.web.hsdb.site.controller.domain;
+package ru.bmn.web.hsdb.site.controller.domain.collection;
 
 import ru.bmn.web.hsdb.model.entity.hs.Card;
 

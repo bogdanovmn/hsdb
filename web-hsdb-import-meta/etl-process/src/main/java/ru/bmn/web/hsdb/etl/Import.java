@@ -18,13 +18,19 @@ public class Import {
 		throws IOException
 	{
 		SpringApplication.run(Import.class, args)
-			.getBean(HearthpwnDatabaseImport.class)
+			.getBean(HearthpwnCollectionImport.class)
+//			.getBean(HearthpwnDatabaseImport.class)
 				.run();
 	}
 
 	@Bean
 	public HearthpwnDatabaseImport getHearthpwnDatabaseImport() {
 		return new HearthpwnDatabaseImport();
+	}
+
+	@Bean
+	public HearthpwnCollectionImport getHearthpwnCollectionImport() {
+		return new HearthpwnCollectionImport();
 	}
 
 	@Bean
