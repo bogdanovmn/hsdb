@@ -2,12 +2,14 @@ package ru.bmn.web.hsdb.model.entity.hs;
 
 import ru.bmn.web.hsdb.model.entity.common.DictionaryEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
 public class Mechanic extends DictionaryEntity {
+	@Column(length = 500)
 	private String description;
 
 	@ManyToMany(mappedBy = "mechanic")

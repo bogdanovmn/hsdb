@@ -63,7 +63,6 @@ import java.util.stream.Collectors;
 		Elements rows = this.getHtmlDocument()
 			.select("table[class^=listing listing-cards-tabular] tr[class~=^(even|odd)$]");
 
-		int i = 0;
 		for (Element row : rows) {
 			Element nameElement = row.select("td[class=col-name").first();
 			URL cardPageUrl = new URL(
@@ -126,8 +125,6 @@ import java.util.stream.Collectors;
 
 			LOG.info("Card '{}' parsed", card.getName());
 			result.add(card);
-
-			if (i++ > 10) break;
 		}
 
 		return result;

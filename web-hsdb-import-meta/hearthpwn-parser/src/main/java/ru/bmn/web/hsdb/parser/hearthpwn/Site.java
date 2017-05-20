@@ -28,7 +28,7 @@ public class Site {
 		LOG.info("Get all cards start process...");
 
 		CardsDatabasePage cardsDatabasePage = new CardsDatabasePage(1);
-		int totalPages = 2;//cardsDatabasePage.getPagesTotal();
+		int totalPages = cardsDatabasePage.getPagesTotal();
 
 		LOG.info("First page fetched, total pages: {}", totalPages);
 

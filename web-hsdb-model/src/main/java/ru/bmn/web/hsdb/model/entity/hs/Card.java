@@ -44,7 +44,7 @@ public class Card extends EntityWithUniqueName {
 	@JoinColumn(name = "artist_id")
 	private Artist artist;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "card_id")
 	private Set<Sound> sounds;
 
