@@ -27,7 +27,14 @@ public abstract class EntityWithUniqueName {
 	}
 
 	public EntityWithUniqueName setName(String name) {
-		this.name = name;
+
+		this.name = name
+			.replaceFirst("^\\s+", "")
+			.replaceFirst("\\s+$", "")
+			.replaceAll("\\s+", " ")
+			.replaceAll("O[^a-zA-Z](\\w)", "O'$1")
+			.replaceAll("(\\w[.,;:])(\\w)", "$1 $2");
+
 		return this;
 	}
 
