@@ -1,13 +1,12 @@
 package ru.bmn.web.hsdb.site.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.app.User;
@@ -32,6 +31,11 @@ public class UserSettings {
 	@Autowired
 	private EntityFactory entityFactory;
 
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+	}
+
 	@GetMapping
 	public ModelAndView form(
 		Model model,
@@ -55,20 +59,28 @@ public class UserSettings {
 
 		User user = this.securityService.getLoggedInUser();
 
-		if (!form.getNewPassword().isEmpty()) {
+		if (form.getNewPassword() != null) {
 			String currentPassword = form.getCurrentPassword();
-			if (currentPassword.isEmpty()) {
+			if (currentPassword == null) {
 				formErrors.add("currentPassword", "Необходимо указать");
 			}
-			else if (form.getNewPassword().isEmpty()) {
+			else if (form.getNewPassword() == null) {
 				formErrors.add("newPassword", "Необходимо указать");
 			}
 			else if (!form.getNewPassword().equals(form.getNewPasswordConfirm())) {
 				formErrors.add("newPasswordConfirm", "Повтор нового пароля не совпадает");
 			}
 			else {
-				if (!new Md5PasswordEncoder().encode(currentPassword).equals(user.getPasswordHash())) {
+				Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+				if (!passwordEncoder.encode(currentPassword).equals(user.getPasswordHash())) {
 					formErrors.add("currentPassword", "Пароль введен неправильно");
+				}
+				else {
+					user.setPasswordHash(
+						passwordEncoder.encode(
+							form.getNewPassword()
+						)
+					);
 				}
 			}
 		}
@@ -81,13 +93,7 @@ public class UserSettings {
 		}
 
 		this.userRepository.save(
-			user
-				.setHearthpwnUserName(form.getHearthpwnUserName())
-				.setPasswordHash(
-					new Md5PasswordEncoder().encode(
-						form.getNewPassword()
-					)
-				)
+			user.setHearthpwnUserName(form.getHearthpwnUserName())
 		);
 
 		return new ModelAndView("redirect:/collection/in");
