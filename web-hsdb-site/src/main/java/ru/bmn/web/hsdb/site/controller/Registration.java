@@ -51,7 +51,7 @@ public class Registration {
 			formErrors.add("passwordConfirm", "Пароль не совпадает");
 		}
 		else if (this.userRepository.findFirstByName(userForm.getName()) != null) {
-			formErrors.addCustom("Пользователь с таким именем ужу существует");
+			formErrors.addCustom("Пользователь с таким именем уже существует");
 		}
 
 		if (formErrors.isNotEmpty()) {

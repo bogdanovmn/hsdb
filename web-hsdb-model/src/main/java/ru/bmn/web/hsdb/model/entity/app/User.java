@@ -19,7 +19,7 @@ public class User extends EntityWithUniqueName {
 	@Column(nullable = false)
 	private Date registerDate;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<CollectionItem> collection;
 
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

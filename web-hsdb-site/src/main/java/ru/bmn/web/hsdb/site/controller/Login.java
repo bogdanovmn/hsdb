@@ -20,7 +20,7 @@ public class Login {
 		}
 
 		if (error != null) {
-			model.addAttribute("errorMsg", "Попробуйте еще разок");
+			model.addAttribute("customError", "Попробуйте еще разок");
 		}
 
 		return new ModelAndView("login", model.asMap());

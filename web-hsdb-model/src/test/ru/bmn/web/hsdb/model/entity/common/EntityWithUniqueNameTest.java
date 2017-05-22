@@ -1,7 +1,9 @@
 package ru.bmn.web.hsdb.model.entity.common;
 
 import org.junit.Test;
+import ru.bmn.web.hsdb.model.entity.app.User;
 import ru.bmn.web.hsdb.model.entity.hs.Artist;
+import ru.bmn.web.hsdb.model.entity.hs.CharacterClass;
 
 import static org.junit.Assert.assertEquals;
 
@@ -40,6 +42,26 @@ public class EntityWithUniqueNameTest {
 		assertEquals(
 			"Some Name",
 			artist.getName()
+		);
+	}
+
+	@Test
+	public void setNameNormalize_4() throws Exception {
+		CharacterClass characterClass = new CharacterClass();
+		characterClass.setName(" Warlock");
+		assertEquals(
+			"Warlock",
+			characterClass.getName()
+		);
+	}
+
+	@Test
+	public void setNameNormalize_5() throws Exception {
+		User user = new User();
+		user.setName("Имя");
+		assertEquals(
+			"Имя",
+			user.getName()
 		);
 	}
 

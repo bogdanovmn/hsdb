@@ -12,7 +12,7 @@ public class CollectionFilter {
 	private final Map<String, Integer> params = new HashMap<>();
 
 	public CollectionFilter(Integer characterId, Integer rarityId, Integer seriesId) {
-		if (characterId != null) this.params.put(CHARACTER_ID, characterId);
+		this.params.put(CHARACTER_ID, characterId == null ? 1 : characterId);
 		if (rarityId != null) this.params.put(RARITY_ID, rarityId);
 		if (seriesId != null) this.params.put(SERIES_ID, seriesId);
 	}

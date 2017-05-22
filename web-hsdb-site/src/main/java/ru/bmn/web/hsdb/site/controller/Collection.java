@@ -10,10 +10,13 @@ import ru.bmn.web.hsdb.model.entity.app.User;
 import ru.bmn.web.hsdb.model.repository.hs.CardRepository;
 import ru.bmn.web.hsdb.site.controller.domain.collection.CollectionFilter;
 import ru.bmn.web.hsdb.site.controller.domain.collection.CollectionFilterMenu;
+import ru.bmn.web.hsdb.site.controller.domain.collection.UserCollectionCard;
+import ru.bmn.web.hsdb.site.controller.domain.collection.UserCollectionFiltered;
 import ru.bmn.web.hsdb.site.controller.domain.common.HeadMenu;
 import ru.bmn.web.hsdb.site.security.HsdbSecurityService;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("/collection")
@@ -34,10 +37,10 @@ public class Collection {
 		User user = this.securityService.getLoggedInUser();
 
 		CollectionFilter collectionFilter = new CollectionFilter(characterId, rarityId, seriesId);
-//		UserCollectionFiltered collection = new UserCollectionFiltered(
-//			user, this.entityFactory, collectionFilter
-//		);
-//		List<UserCollectionCard> cards = collection.getCards();
+		UserCollectionFiltered collection = new UserCollectionFiltered(
+			user, this.entityFactory, collectionFilter
+		);
+		List<UserCollectionCard> cards = collection.getCards();
 
 		return new ModelAndView(
 			"collection",
@@ -47,7 +50,7 @@ public class Collection {
 				put("collectionPercent", 666); //Math.floor(100 * collection.total() / boosterCards.total()));
 				put("type", "in");
 				put("filter", new CollectionFilterMenu(entityFactory).getItems(collectionFilter));
-//				put("cards", cards);
+				put("cards", cards);
 			}}
 		);
 	}
