@@ -3,6 +3,7 @@ package ru.bmn.web.hsdb.model.entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.bmn.web.hsdb.model.entity.common.EntityWithUniqueName;
 import ru.bmn.web.hsdb.model.entity.hs.Card;
+import ru.bmn.web.hsdb.model.entity.hs.CharacterClass;
 import ru.bmn.web.hsdb.model.repository.common.EntityWithUniqueNameRepository;
 
 import java.util.HashMap;
@@ -12,12 +13,14 @@ import java.util.concurrent.ConcurrentHashMap;
 public class EntityFactory {
 	private final Map<Class<?>, Map<String, EntityWithUniqueName>> singleEntityCache = new ConcurrentHashMap<>();
 	private final Map<Class<?>, Iterable> setEntityCache = new ConcurrentHashMap<>();
-	private final Map<Integer, Map<Integer, Card>> cardsCache = new HashMap<>();
+	private final Map<Integer, Map<Integer, Card>> cardsCache = new ConcurrentHashMap<>();
+	private final Map<String, Card> cardByNameCache = new ConcurrentHashMap<>();
+
 	@Autowired
 	private EntityMapFactory entityMapFactory;
 
-	public EntityFactory() {
-	}
+	public EntityFactory() {}
+
 
 	public EntityWithUniqueName getPersistEntityWithUniqueName(EntityWithUniqueName entity) {
 		EntityWithUniqueName result;
@@ -62,13 +65,26 @@ public class EntityFactory {
 			Iterable allCards = this.getAll(Card.class);
 			for (Object cardObjRef : allCards) {
 				Card card = (Card) cardObjRef;
-				Map<Integer, Card> map = this.cardsCache.computeIfAbsent(
-					characterId, x -> new HashMap<>()
-				);
-				map.put(card.getId(), card);
+				for (CharacterClass characterClass : card.getCharacters()) {
+					Map<Integer, Card> map = this.cardsCache.computeIfAbsent(
+						characterClass.getId(), x -> new HashMap<>()
+					);
+					map.put(card.getId(), card);
+				}
 			}
 		}
 
-		return result;
+		return this.cardsCache.get(characterId);
+	}
+
+	public Card getCardByName(String name) {
+		if (this.cardByNameCache.isEmpty()) {
+			Iterable allCards = this.getAll(Card.class);
+			for (Object cardObjRef : allCards) {
+				Card card = (Card) cardObjRef;
+				this.cardByNameCache.put(card.getName(), card);
+			}
+		}
+		return this.cardByNameCache.get(name);
 	}
 }

@@ -1,9 +1,5 @@
 package ru.bmn.web.hsdb.site.controller.domain.form;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 public class UserSettingsForm {
