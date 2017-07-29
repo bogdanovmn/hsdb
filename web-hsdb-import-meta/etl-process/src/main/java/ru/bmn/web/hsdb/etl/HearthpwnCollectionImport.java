@@ -37,7 +37,7 @@ public class HearthpwnCollectionImport {
 		}
 	}
 
-	void syncCollection(User user)
+	private void syncCollection(User user)
 		throws IOException
 	{
 		LOG.info("Parse collection for user '{}'...", user.getHearthpwnUserName());
