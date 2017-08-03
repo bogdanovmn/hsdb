@@ -1,0 +1,9 @@
+
+dependencies {
+    compile project(':web-hsdb-model')
+    compile group: 'org.jsoup', name: 'jsoup', version:'1.10.2'
+    compile group: 'commons-io', name: 'commons-io', version:'2.5'
+    compile(group: 'org.springframework', name: 'spring-core', version:'4.3.8.RELEASE') {
+//        exclude(module: 'commons-logging')
+    }
+}

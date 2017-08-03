@@ -1,0 +1,12 @@
+rootProject.name = 'web-hsdb-meta'
+include 'web-hsdb-model'
+include 'web-hsdb-site'
+include 'web-hsdb-import-meta:hearthpwn-parser'
+include 'web-hsdb-import-meta:etl-process'
+//include 'web-hsdb-import-meta'
+
+//project(':web-hsdb-model').projectDir = "$rootDir/web-hsdb-model" as File
+//project(':web-hsdb-site').projectDir = "$rootDir/web-hsdb-site" as File
+//project(':web-hsdb-import-meta:hearthpwn-parser').projectDir = "$rootDir/web-hsdb-import-meta/hearthpwn-parser" as File
+//project(':web-hsdb-import-meta:etl-process').projectDir = "$rootDir/web-hsdb-import-meta/etl-process" as File
+//project(':web-hsdb-import-meta').projectDir = "$rootDir/web-hsdb-import-meta" as File
