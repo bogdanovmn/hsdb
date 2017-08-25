@@ -13,7 +13,7 @@ import ru.bmn.web.hsdb.parser.hearthpwn.Site;
 import java.io.IOException;
 import java.util.Set;
 
-public class HearthpwnCollectionImport {
+public class HearthpwnCollectionImport implements ImportService {
 	private static final Logger LOG = LogManager.getLogger(HearthpwnCollectionImport.class);
 
 	@Autowired

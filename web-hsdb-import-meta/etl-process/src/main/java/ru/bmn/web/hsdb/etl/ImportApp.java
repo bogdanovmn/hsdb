@@ -13,24 +13,35 @@ import java.io.IOException;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "ru.bmn.web.hsdb.model.repository")
 @EntityScan(basePackages = "ru.bmn.web.hsdb.model.entity")
-public class Import {
+public class ImportApp {
 	public static void main(String[] args)
 		throws IOException
 	{
-		SpringApplication.run(Import.class, args)
-			.getBean(HearthpwnCollectionImport.class)
-//			.getBean(HearthpwnDatabaseImport.class)
+		SpringApplication.run(ImportApp.class, args)
+			.getBean(ImportService.class)
 				.run();
 	}
 
 	@Bean
-	public HearthpwnDatabaseImport getHearthpwnDatabaseImport() {
-		return new HearthpwnDatabaseImport();
-	}
+	public ImportService getImportService()
+		throws Exception
+	{
+		String importType = System.getProperty("importType", "");
 
-	@Bean
-	public HearthpwnCollectionImport getHearthpwnCollectionImport() {
-		return new HearthpwnCollectionImport();
+		ImportService result;
+
+		switch (importType) {
+			case "collection":
+				result = new HearthpwnCollectionImport();
+				break;
+			case "database":
+				result = new HearthpwnDatabaseImport();
+				break;
+			default:
+				throw new Exception("wrong importType value");
+		}
+
+		return result;
 	}
 
 	@Bean

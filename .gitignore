@@ -2,3 +2,6 @@
 *.iml
 target
 cache
+build
+.gradle
+out

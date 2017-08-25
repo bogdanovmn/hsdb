@@ -1,0 +1,5 @@
+
+dependencies {
+  compile project(':web-hsdb-model')
+  compile project(':web-hsdb-import-meta:hearthpwn-parser')
+}
