@@ -1,5 +1,6 @@
 package ru.bmn.web.hsdb.parser.hearthpwn;
 
+import com.github.bogdanovmn.downloadwlc.UrlContentDiscCache;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

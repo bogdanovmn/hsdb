@@ -1,5 +1,6 @@
 package ru.bmn.web.hsdb.parser.hearthpwn;
 
+import com.github.bogdanovmn.downloadwlc.UrlContentDiscCache;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
