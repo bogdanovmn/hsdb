@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ru.bmn.web.hsdb.model.entity.EntityFactory;
 import ru.bmn.web.hsdb.model.entity.app.User;
 import ru.bmn.web.hsdb.model.repository.app.UserRepository;
 import ru.bmn.web.hsdb.site.controller.common.FormErrors;
@@ -28,9 +27,6 @@ public class UserSettings {
 	@Autowired
 	private HsdbSecurityService securityService;
 
-	@Autowired
-	private EntityFactory entityFactory;
-
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
@@ -45,6 +41,14 @@ public class UserSettings {
 
 		model.addAttribute("referer", referer);
 		model.addAttribute("userName", user.getName());
+		model.addAttribute("userEmail", user.getEmail());
+		model.addAttribute("userRegistrationDate", user.getRegisterDate());
+		model.addAttribute(
+			"userSettingsForm",
+			new UserSettingsForm().setHearthpwnUserName(
+				user.getHearthpwnUserName()
+			)
+		);
 		return new ModelAndView("user_settings");
 	}
 
