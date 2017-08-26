@@ -4,6 +4,7 @@ import com.github.bogdanovmn.downloadwlc.UrlContentDiscCache;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import ru.bmn.web.hsdb.model.entity.hs.*;
 
 import java.io.IOException;
@@ -81,11 +82,18 @@ import java.util.stream.Collectors;
                 switch (h3Title) {
                     case "Card Text":
                         this.text = infoDiv.select("p").first().text();
-                        this.mechanics = infoDiv.select("span[class*=mechanics]").stream()
+//                        this.mechanics = infoDiv.select("span[class*=mechanics]").stream()
+                        this.mechanics = infoDiv.select("strong").stream()
                             .map(
-                                x -> (Mechanic) new Mechanic()
-                                    .setDescription(x.attr("title"))
-                                    .setName(x.text())
+                                x -> {
+                                    Mechanic mechanic = new Mechanic();
+                                    Elements descrElements = x.select("span[class*=mechanics]");
+                                    if (!descrElements.isEmpty()) {
+                                        mechanic.setDescription(descrElements.first().attr("title"));
+                                    }
+                                    mechanic.setName(x.text());
+                                    return mechanic;
+                                }
                             )
                             .collect(
                                 Collectors.toSet()

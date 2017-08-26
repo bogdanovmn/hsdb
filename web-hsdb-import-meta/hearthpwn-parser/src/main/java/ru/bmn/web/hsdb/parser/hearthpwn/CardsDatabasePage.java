@@ -67,7 +67,7 @@ import java.util.stream.Collectors;
 		for (Element row : rows) {
 			// Skip "Hero" and "Hero power" card types
 			String type = row.select("td[class=col-type").first().text();
-			if (type.contains("Hero")) {
+			if (type.contains("Hero") && !type.equals("Playable Hero")) {
 				continue;
 			}
 
