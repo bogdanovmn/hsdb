@@ -5,6 +5,7 @@ import ru.bmn.web.hsdb.model.entity.app.CollectionItem;
 import ru.bmn.web.hsdb.model.entity.app.User;
 import ru.bmn.web.hsdb.model.entity.hs.Card;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -22,13 +23,17 @@ public class UserCollectionFiltered {
 	}
 
 	public List<UserCollectionCard> getCards() {
-
 		Map<Integer, Card> allCharactersCard = this.entityFactory.getCharactersCards(
 			this.collectionFilter.getCharacterId()
 		);
 
 		Set<CollectionItem> collectionItems = user.getCollection();
 		return collectionItems.stream()
+			.filter(x ->
+				this.collectionFilter.isApplicable(
+					x.getCard()
+				)
+			)
 			.map(x ->
 				new UserCollectionCard(
 					allCharactersCard.get(x.getCard().getId()),
@@ -36,6 +41,30 @@ public class UserCollectionFiltered {
 					x.getGoldCount()
 				)
 			)
+			.collect(Collectors.toList());
+	}
+
+	public List<UserCollectionCard> getOutsideCards() {
+		Map<Integer, Card> allCharactersCard = this.entityFactory.getCharactersCards(
+			this.collectionFilter.getCharacterId()
+		);
+
+		Map<Integer, CollectionItem> collectionItemsMap = new HashMap<>();
+		for (CollectionItem ci : user.getCollection()) {
+			collectionItemsMap.put(ci.getCard().getId(), ci);
+		}
+
+		return allCharactersCard.values().stream()
+			.filter(this.collectionFilter::isApplicable)
+			.map(x -> {
+				CollectionItem ci = collectionItemsMap.get(x.getId());
+
+				return new UserCollectionCard(
+					x,
+					ci != null ? ci.getNormalCount() : 0,
+					ci != null ? ci.getGoldCount() : 0
+				);
+			})
 			.collect(Collectors.toList());
 	}
 }

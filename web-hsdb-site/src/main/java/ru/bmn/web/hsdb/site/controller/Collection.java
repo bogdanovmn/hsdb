@@ -54,4 +54,31 @@ public class Collection {
 			}}
 		);
 	}
+
+	@GetMapping("/out")
+	public ModelAndView collectionOut(
+		Integer rarityId,
+		Integer seriesId,
+		Integer characterId
+	) {
+		User user = this.securityService.getLoggedInUser();
+
+		CollectionFilter collectionFilter = new CollectionFilter(characterId, rarityId, seriesId);
+		UserCollectionFiltered collection = new UserCollectionFiltered(
+			user, this.entityFactory, collectionFilter
+		);
+		List<UserCollectionCard> cards = collection.getOutsideCards();
+
+		return new ModelAndView(
+			"collection",
+			new HashMap<String, Object>() {{
+				put("userName", user.getName());
+				put("menu", new HeadMenu(HeadMenu.HMI_COLLECTION_OUT).getItems());
+				put("collectionPercent", 999); //Math.floor(100 * collection.total() / boosterCards.total()));
+				put("type", "out");
+				put("filter", new CollectionFilterMenu(entityFactory).getItems(collectionFilter));
+				put("cards", cards);
+			}}
+		);
+	}
 }

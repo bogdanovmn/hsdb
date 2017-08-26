@@ -1,5 +1,7 @@
 package ru.bmn.web.hsdb.site.controller.domain.collection;
 
+import ru.bmn.web.hsdb.model.entity.hs.Card;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -42,5 +44,12 @@ public class CollectionFilter {
 			.collect(
 				Collectors.joining("&")
 			);
+	}
+
+	public boolean isApplicable(Card card) {
+		return
+			(this.getRarityId() == null || card.getRarity().getId().equals(this.getRarityId()))
+			&&
+			(this.getSeriesId() == null || card.getSeries().getId().equals(this.getSeriesId()));
 	}
 }
