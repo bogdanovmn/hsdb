@@ -1,9 +1,0 @@
-
-apply plugin: 'application'
-
-dependencies {
-  compile project(':web-hsdb-model')
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.3.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'1.5.3.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mustache', version:'1.5.3.RELEASE'
-}
