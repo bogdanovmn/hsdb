@@ -3,19 +3,19 @@ package com.github.bogdanovmn.hsdb.parser.hearthpwn;
 import com.github.bogdanovmn.downloadwlc.UrlContentDiskCache;
 import com.github.bogdanovmn.hsdb.model.Card;
 import com.github.bogdanovmn.hsdb.model.CollectionItem;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
 /* default */ class UserCollectionPage {
-	private static final Logger LOG = LogManager.getLogger(UserCollectionPage.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UserCollectionPage.class);
 
 	private static final UrlContentDiskCache CACHE = new UrlContentDiskCache(
 		UserCollectionPage.class

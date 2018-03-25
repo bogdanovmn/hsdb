@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import java.io.IOException;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "com.github.bogdanovmn.hsdb.web.hsdb.model.repository")
-@EntityScan(basePackages = "com.github.bogdanovmn.hsdb.web.hsdb.model.entity")
+@EnableJpaRepositories(basePackages = "com.github.bogdanovmn.hsdb.model")
+@EntityScan(basePackages = "com.github.bogdanovmn.hsdb.model")
 public class ImportApp {
 	public static void main(String[] args)
 		throws IOException

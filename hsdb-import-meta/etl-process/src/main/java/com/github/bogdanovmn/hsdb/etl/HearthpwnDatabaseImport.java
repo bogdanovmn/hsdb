@@ -2,8 +2,8 @@ package com.github.bogdanovmn.hsdb.etl;
 
 import com.github.bogdanovmn.hsdb.model.*;
 import com.github.bogdanovmn.hsdb.parser.hearthpwn.Site;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 public class HearthpwnDatabaseImport implements ImportService {
-	private static final Logger LOG = LogManager.getLogger(HearthpwnDatabaseImport.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HearthpwnDatabaseImport.class);
 
 	@Autowired
 	private EntityFactory entityFactory;

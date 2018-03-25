@@ -3,8 +3,8 @@ package com.github.bogdanovmn.hsdb.parser.hearthpwn;
 
 import com.github.bogdanovmn.hsdb.model.Card;
 import com.github.bogdanovmn.hsdb.model.CollectionItem;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Set;
 
 public class Site {
-	private static final Logger LOG = LogManager.getLogger(Site.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Site.class);
 
-	/* default */ static String PREFIX = "http://www.hearthpwn.com/";
+	static String PREFIX = "http://www.hearthpwn.com/";
 
 
 	public Site() {

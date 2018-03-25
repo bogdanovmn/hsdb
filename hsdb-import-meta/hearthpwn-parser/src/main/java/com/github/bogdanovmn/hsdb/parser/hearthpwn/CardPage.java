@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/* default */ class CardPage {
+class CardPage {
     private static final UrlContentDiskCache CACHE = new UrlContentDiskCache(
         CardPage.class
     );
@@ -33,11 +33,11 @@ import java.util.stream.Collectors;
     private Race race;
 
 
-    public CardPage(URL url) {
+    CardPage(URL url) {
         this.url = url;
     }
 
-    public void parse()
+    void parse()
         throws IOException
     {
         if (!this.isParsed) {

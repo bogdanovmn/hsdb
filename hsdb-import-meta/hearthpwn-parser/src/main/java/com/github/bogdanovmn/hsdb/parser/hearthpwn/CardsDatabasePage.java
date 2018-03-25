@@ -4,12 +4,12 @@ import com.github.bogdanovmn.downloadwlc.UrlContentDiskCache;
 import com.github.bogdanovmn.hsdb.model.Card;
 import com.github.bogdanovmn.hsdb.model.CharacterClass;
 import com.github.bogdanovmn.hsdb.model.Type;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,8 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/* default */ class CardsDatabasePage {
-	private static final Logger LOG = LogManager.getLogger(CardsDatabasePage.class);
+class CardsDatabasePage {
+	private static final Logger LOG = LoggerFactory.getLogger(CardsDatabasePage.class);
 
 	private static final String PREFIX = Site.PREFIX + "cards?display=1&filter-premium=1&page=";
 
